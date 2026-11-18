@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "expo-ui-easy example",
+    "slug": "expo-ui-easy-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "platforms": ["android"],
+    "android": { "package": "dev.nativeui.example" }
+  }
+}

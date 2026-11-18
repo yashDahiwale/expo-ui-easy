@@ -1,0 +1,9 @@
+node_modules/
+lib/
+.expo/
+dist/
+android/
+ios/
+*.tsbuildinfo
+.DS_Store
+.next/

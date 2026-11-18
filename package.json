@@ -1,0 +1,23 @@
+{
+  "name": "expo-ui-easy",
+  "private": true,
+  "description": "Typed React Native wrappers for Expo UI's Jetpack Compose components (Android).",
+  "workspaces": [
+    "packages/*",
+    "example"
+  ],
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build -w expo-ui-easy",
+    "example": "npm run android -w example",
+    "changeset": "changeset",
+    "release": "npm run build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.0"
+  }
+}
