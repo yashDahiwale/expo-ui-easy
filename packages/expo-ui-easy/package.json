@@ -33,6 +33,8 @@
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run",
+    "generate": "node scripts/generate-components.mjs",
+    "generate:check": "node scripts/generate-components.mjs --check",
     "build": "bob build",
     "clean": "del-cli lib"
   },

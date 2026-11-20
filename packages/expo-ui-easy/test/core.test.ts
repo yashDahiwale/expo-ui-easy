@@ -89,3 +89,43 @@ describe('isNativeViewAvailable', () => {
     delete g.expo;
   });
 });
+
+import { defaultKeyExtractor, isNearEnd } from '../src/android/recipes/list-utils';
+import { formatTopOffenders, getHostStats, registerAutoHost, subscribeHostStats } from '../src/android/internal/host-stats';
+
+describe('list utils', () => {
+  it('defaultKeyExtractor follows FlatList: key, then id, then index', () => {
+    expect(defaultKeyExtractor({ key: 'k', id: 'i' }, 3)).toBe('k');
+    expect(defaultKeyExtractor({ id: 7 }, 3)).toBe('7');
+    expect(defaultKeyExtractor({ name: 'x' }, 3)).toBe('3');
+    expect(defaultKeyExtractor('plain', 5)).toBe('5');
+    expect(defaultKeyExtractor(null, 0)).toBe('0');
+  });
+  it('isNearEnd counts rows from the end', () => {
+    expect(isNearEnd(95, 100, 4)).toBe(false);
+    expect(isNearEnd(96, 100, 4)).toBe(true);
+    expect(isNearEnd(99, 100, 0.5)).toBe(true); // a fractional / tiny threshold still means "the last row"
+    expect(isNearEnd(98, 100, 0.5)).toBe(false);
+    expect(isNearEnd(0, 0, 4)).toBe(false);
+  });
+});
+
+describe('host stats', () => {
+  it('counts auto Hosts per component, notifies subscribers and cleans up', () => {
+    const seen: number[] = [];
+    const unsubscribe = subscribeHostStats(() => seen.push(getHostStats().autoHosts));
+    const a1 = registerAutoHost('Switch');
+    const a2 = registerAutoHost('Switch');
+    const b = registerAutoHost('Text');
+    expect(getHostStats().autoHosts).toBe(3);
+    expect(getHostStats().byComponent).toEqual([{ name: 'Switch', count: 2 }, { name: 'Text', count: 1 }]);
+    expect(formatTopOffenders(getHostStats(), 1)).toBe('Switch x2');
+    a1(); a2(); b();
+    expect(getHostStats()).toEqual({ autoHosts: 0, byComponent: [] });
+    expect(seen.length).toBe(6);
+    unsubscribe();
+  });
+  it('returns the same snapshot object while nothing changes (needed by useSyncExternalStore)', () => {
+    expect(getHostStats()).toBe(getHostStats());
+  });
+});

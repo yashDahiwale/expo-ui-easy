@@ -13,6 +13,7 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: npm run generate:check -w expo-ui-easy
       - run: npm run typecheck
       - run: npm test
       - run: npm run build

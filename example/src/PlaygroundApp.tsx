@@ -20,6 +20,13 @@ function Preview({ demoKey }: { demoKey: string }): ReactNode {
   return <Demo />;
 }
 
+/** Dev badge counting auto-created Compose Hosts. Loaded lazily: the library only exists on Android. */
+function DebugOverlay(): ReactNode {
+  if (Platform.OS !== 'android') return null;
+  const { HostDebugOverlay } = require('expo-ui-easy') as typeof import('expo-ui-easy');
+  return <HostDebugOverlay />;
+}
+
 function Stress(): ReactNode {
   if (Platform.OS !== 'android') {
     return (
@@ -70,6 +77,7 @@ function Shell(): ReactNode {
         {route.name === 'preview' ? <Preview demoKey={route.key} /> : null}
         {route.name === 'stress' ? <Stress /> : null}
       </View>
+      <DebugOverlay />
     </View>
   );
 }

@@ -13,6 +13,12 @@ export interface DemoEntry {
 
 export const DEMOS: readonly DemoEntry[] = [
   {
+    key: 'nativelist',
+    title: 'NativeList',
+    subtitle: 'FlatList-style API on one Host + recycling LazyColumn: header, footer, empty, separator, end reached, refresh',
+    load: () => (require('./demos/NativeListDemo') as typeof import('./demos/NativeListDemo')).default,
+  },
+  {
     key: 'buttons',
     title: 'Buttons',
     subtitle: 'Button, FilledTonalButton, OutlinedButton, ElevatedButton, TextButton, start/end icons, icon buttons',

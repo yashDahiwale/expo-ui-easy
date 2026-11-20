@@ -1,4 +1,4 @@
-# expo-ui-easy (working name)
+# expo-ui-easy
 
 Typed React Native wrappers for [Expo UI](https://docs.expo.dev/versions/latest/sdk/ui/jetpack-compose/)'s
 Jetpack Compose components. Expo's names and props stay as they are; React Native names are used only for props

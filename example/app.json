@@ -6,6 +6,6 @@
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "platforms": ["android"],
-    "android": { "package": "dev.nativeui.example" }
+    "android": { "package": "dev.expouieasy.example" }
   }
 }

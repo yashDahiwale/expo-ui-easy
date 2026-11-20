@@ -13,7 +13,8 @@ export type StrategyId =
   | 'native-auto-flatlist'
   | 'native-row-host-flatlist'
   | 'native-single-host-column'
-  | 'native-single-host-lazy';
+  | 'native-single-host-lazy'
+  | 'native-list';
 
 export interface StrategyInfo {
   id: StrategyId;
@@ -38,6 +39,8 @@ export const STRATEGIES: readonly StrategyInfo[] = [
     description: 'One Host with a scrolling Compose Column; every row is composed at once.' },
   { id: 'native-single-host-lazy', label: 'Native · ONE Host · LazyColumn', short: 'N lazy', native: true, rendersAll: false,
     description: 'One Host with a recycling LazyColumn: only rows near the viewport are composed.' },
+  { id: 'native-list', label: 'Native · NativeList (recipe)', short: 'N recipe', native: true, rendersAll: false,
+    description: "The library's NativeList: the single-Host LazyColumn above behind a FlatList-style API. Should match it." },
 ];
 
 export const STRATEGY_BY_ID: Readonly<Record<StrategyId, StrategyInfo>> = Object.fromEntries(

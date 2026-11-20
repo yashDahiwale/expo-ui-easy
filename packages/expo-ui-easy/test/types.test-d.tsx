@@ -141,3 +141,52 @@ export function DropdownStyle() {
     </DropdownMenu>
   );
 }
+
+// ---------------------------------------------------------------------------------------------
+// NativeList + diagnostics
+// ---------------------------------------------------------------------------------------------
+import { HorizontalDivider, HostDebugOverlay, NativeList, useHostStats } from '../src';
+
+interface Row { id: number; title: string }
+declare const rows: readonly Row[];
+
+export function ListUsage() {
+  const stats = useHostStats();
+  return (
+    <>
+      <NativeList
+        data={rows}
+        renderItem={({ item }) => <ListItem><ListItem.HeadlineContent><Text>{item.title}</Text></ListItem.HeadlineContent></ListItem>}
+        keyExtractor={(item) => String(item.id)}
+        ListHeaderComponent={<Text>Header</Text>}
+        ListEmptyComponent={<Text>Empty</Text>}
+        ItemSeparatorComponent={<HorizontalDivider />}
+        onEndReached={() => {}}
+        onEndReachedThreshold={6}
+        refreshing={false}
+        onRefresh={() => {}}
+        contentPadding={{ top: 8, bottom: 8 }}
+        verticalArrangement={{ spacedBy: 4 }}
+        style={{ flex: 1 }}
+        testID="list"
+      />
+      <HostDebugOverlay />
+      <Text>{String(stats.autoHosts)}</Text>
+    </>
+  );
+}
+
+export function ListInvalid() {
+  return (
+    <>
+      {/* @ts-expect-error renderItem must return a React element, not a string */}
+      <NativeList data={rows} renderItem={({ item }) => item.title} />
+      {/* @ts-expect-error keyExtractor must return a string */}
+      <NativeList data={rows} renderItem={() => <Text>x</Text>} keyExtractor={(item) => item.id} />
+      {/* @ts-expect-error data is required */}
+      <NativeList renderItem={() => <Text>x</Text>} />
+      {/* @ts-expect-error item type is inferred from data */}
+      <NativeList data={rows} renderItem={({ item }) => <Text>{item.missing}</Text>} />
+    </>
+  );
+}

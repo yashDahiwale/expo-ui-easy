@@ -1,0 +1,607 @@
+{
+  "$comment": "Source of truth for the public components. src/android/components/generated.ts is generated from this file: run `npm run generate`. See scripts/generate-components.mjs.",
+  "expoUiVersion": "58.0.28",
+  "presets": {
+    "stretch": "Host sizes to its content vertically and stretches horizontally (bars, row scrollers, dividers).",
+    "stretchFill": "Like stretch, plus a leading fillMaxWidth() modifier (sliders, linear progress, inline date picker).",
+    "fillParent": "Host fills its parent (scrollables need a bounded size).",
+    "rangePicker": "Fills the width with a fixed 480dp height (vertically scrolling month list)."
+  },
+  "components": [
+    {
+      "name": "Switch",
+      "category": "selection",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "Checkbox",
+      "category": "selection",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "RadioButton",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "TriStateCheckbox",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "ToggleButton",
+      "category": "selection",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "IconToggleButton",
+      "category": "selection",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "FilledIconToggleButton",
+      "category": "selection",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "OutlinedIconToggleButton",
+      "category": "selection",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "SegmentedButton",
+      "category": "selection",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "SingleChoiceSegmentedButtonRow",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "MultiChoiceSegmentedButtonRow",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "SyncSwitch",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "AssistChip",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "FilterChip",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "InputChip",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "SuggestionChip",
+      "category": "selection",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Slider",
+      "category": "sliders",
+      "kind": "wrapped",
+      "hostPreset": "stretchFill"
+    },
+    {
+      "name": "RangeSlider",
+      "category": "sliders",
+      "kind": "wrapped",
+      "hostPreset": "stretchFill",
+      "since": "58.0.28",
+      "requiresViews": [
+        "RangeSliderView"
+      ]
+    },
+    {
+      "name": "VerticalSlider",
+      "category": "sliders",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Text",
+      "category": "text",
+      "kind": "wrapped",
+      "rename": {
+        "numberOfLines": "maxLines"
+      },
+      "hostStyleProp": "containerStyle"
+    },
+    {
+      "name": "BasicTextField",
+      "category": "text",
+      "kind": "wrapped",
+      "rename": {
+        "onChangeText": "onValueChange"
+      }
+    },
+    {
+      "name": "IconButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "FilledIconButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "FilledTonalIconButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "OutlinedIconButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "FloatingActionButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "SmallFloatingActionButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "LargeFloatingActionButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "ExtendedFloatingActionButton",
+      "category": "buttons",
+      "kind": "wrapped"
+    },
+    {
+      "name": "SplitButtonLayout",
+      "category": "buttons",
+      "kind": "wrapped",
+      "since": "58.0.26",
+      "requiresViews": [
+        "SplitButtonLayoutView",
+        "SplitButtonLeadingButtonView",
+        "SplitButtonTrailingButtonView"
+      ]
+    },
+    {
+      "name": "CircularProgressIndicator",
+      "category": "progress",
+      "kind": "wrapped"
+    },
+    {
+      "name": "CircularWavyProgressIndicator",
+      "category": "progress",
+      "kind": "wrapped"
+    },
+    {
+      "name": "LoadingIndicator",
+      "category": "progress",
+      "kind": "wrapped"
+    },
+    {
+      "name": "ContainedLoadingIndicator",
+      "category": "progress",
+      "kind": "wrapped"
+    },
+    {
+      "name": "LinearProgressIndicator",
+      "category": "progress",
+      "kind": "wrapped",
+      "hostPreset": "stretchFill"
+    },
+    {
+      "name": "LinearWavyProgressIndicator",
+      "category": "progress",
+      "kind": "wrapped",
+      "hostPreset": "stretchFill"
+    },
+    {
+      "name": "DateTimePicker",
+      "category": "pickers",
+      "kind": "wrapped",
+      "hostPreset": "stretchFill"
+    },
+    {
+      "name": "DateRangePicker",
+      "category": "pickers",
+      "kind": "wrapped",
+      "hostPreset": "rangePicker"
+    },
+    {
+      "name": "DatePickerDialog",
+      "category": "pickers",
+      "kind": "wrapped"
+    },
+    {
+      "name": "DateRangePickerDialog",
+      "category": "pickers",
+      "kind": "wrapped"
+    },
+    {
+      "name": "TimePickerDialog",
+      "category": "pickers",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Row",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Column",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Box",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "FlowRow",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Spacer",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Surface",
+      "category": "layout",
+      "kind": "wrapped",
+      "rename": {
+        "onValueChange": "onCheckedChange"
+      }
+    },
+    {
+      "name": "Card",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "ElevatedCard",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "OutlinedCard",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "ListItem",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "VerticalDivider",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Badge",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "BadgedBox",
+      "category": "layout",
+      "kind": "wrapped"
+    },
+    {
+      "name": "HorizontalDivider",
+      "category": "layout",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "Icon",
+      "category": "media",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Image",
+      "category": "media",
+      "kind": "wrapped"
+    },
+    {
+      "name": "AnimatedVisibility",
+      "category": "media",
+      "kind": "wrapped"
+    },
+    {
+      "name": "LazyColumn",
+      "category": "scrollables",
+      "kind": "wrapped",
+      "hostPreset": "fillParent"
+    },
+    {
+      "name": "LazyRow",
+      "category": "scrollables",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "HorizontalPager",
+      "category": "scrollables",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "HorizontalCenteredHeroCarousel",
+      "category": "scrollables",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "HorizontalMultiBrowseCarousel",
+      "category": "scrollables",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "HorizontalUncontainedCarousel",
+      "category": "scrollables",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "PullToRefreshBox",
+      "category": "scrollables",
+      "kind": "wrapped",
+      "hostPreset": "fillParent"
+    },
+    {
+      "name": "AlertDialog",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "BasicAlertDialog",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "ModalBottomSheet",
+      "category": "overlays",
+      "kind": "wrapped",
+      "explicitType": true
+    },
+    {
+      "name": "DropdownMenu",
+      "category": "overlays",
+      "kind": "wrapped",
+      "hostStyleProp": "containerStyle"
+    },
+    {
+      "name": "DropdownMenuPopup",
+      "category": "overlays",
+      "kind": "wrapped",
+      "requiresViews": [
+        "DropdownMenuPopupView"
+      ]
+    },
+    {
+      "name": "DropdownMenuGroup",
+      "category": "overlays",
+      "kind": "wrapped",
+      "requiresViews": [
+        "DropdownMenuGroupView"
+      ]
+    },
+    {
+      "name": "DropdownMenuItem",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "SelectableDropdownMenuItem",
+      "category": "overlays",
+      "kind": "wrapped",
+      "since": "58.0.26",
+      "requiresViews": [
+        "SelectableDropdownMenuItemView"
+      ]
+    },
+    {
+      "name": "ExposedDropdownMenuBox",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "ExposedDropdownMenu",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Snackbar",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "SnackbarHost",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "TooltipBox",
+      "category": "overlays",
+      "kind": "wrapped"
+    },
+    {
+      "name": "TopAppBar",
+      "category": "bars",
+      "kind": "wrapped",
+      "hostPreset": "stretch",
+      "since": "58.0.22",
+      "requiresViews": [
+        "TopAppBarView"
+      ]
+    },
+    {
+      "name": "NavigationBar",
+      "category": "bars",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "SearchBar",
+      "category": "bars",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "DockedSearchBar",
+      "category": "bars",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "HorizontalFloatingToolbar",
+      "category": "bars",
+      "kind": "wrapped",
+      "hostPreset": "stretch"
+    },
+    {
+      "name": "NavigationBarItem",
+      "category": "bars",
+      "kind": "wrapped"
+    },
+    {
+      "name": "Button",
+      "category": "buttons",
+      "kind": "custom",
+      "file": "src/android/components/buttons.tsx"
+    },
+    {
+      "name": "FilledTonalButton",
+      "category": "buttons",
+      "kind": "custom",
+      "file": "src/android/components/buttons.tsx"
+    },
+    {
+      "name": "OutlinedButton",
+      "category": "buttons",
+      "kind": "custom",
+      "file": "src/android/components/buttons.tsx"
+    },
+    {
+      "name": "ElevatedButton",
+      "category": "buttons",
+      "kind": "custom",
+      "file": "src/android/components/buttons.tsx"
+    },
+    {
+      "name": "TextButton",
+      "category": "buttons",
+      "kind": "custom",
+      "file": "src/android/components/buttons.tsx"
+    },
+    {
+      "name": "TextField",
+      "category": "text",
+      "kind": "custom",
+      "file": "src/android/components/inputs.tsx"
+    },
+    {
+      "name": "OutlinedTextField",
+      "category": "text",
+      "kind": "custom",
+      "file": "src/android/components/inputs.tsx"
+    },
+    {
+      "name": "Host",
+      "category": "host",
+      "kind": "host",
+      "file": "src/android/host/host.tsx"
+    },
+    {
+      "name": "RNHostView",
+      "category": "host",
+      "kind": "host",
+      "file": "src/android/host/host.tsx"
+    },
+    {
+      "name": "NativeList",
+      "category": "scrollables",
+      "kind": "custom",
+      "file": "src/android/recipes/NativeList.tsx",
+      "origin": "library"
+    }
+  ],
+  "passthrough": [
+    "CompositionLocalProvider",
+    "DockedSearchBarLeadingIcon",
+    "DockedSearchBarPlaceholder",
+    "EnterTransition",
+    "ExitTransition",
+    "ExpandedFullScreenSearchBar",
+    "HorizontalFloatingToolbarFloatingActionButton",
+    "HostPaletteContext",
+    "Items",
+    "Preview",
+    "SearchBarPlaceholder",
+    "Shape",
+    "SplitButtonLeadingButton",
+    "SplitButtonTrailingButton",
+    "SwitchThumbContent",
+    "Trigger",
+    "getMaterialColors",
+    "isDynamicColorAvailable",
+    "useMaterialColors",
+    "useNativeState",
+    "useWorkletCallback"
+  ],
+  "ignored": {
+    "transformButtonProps": "Expo internal helper",
+    "transformToggleButtonProps": "Expo internal helper",
+    "parseJSXShape": "Expo internal helper",
+    "LazyItems": "Exposed as LazyColumn.Items / LazyRow.Items statics"
+  },
+  "extras": [
+    "wrap",
+    "isNativeViewAvailable",
+    "missingNativeViews",
+    "useIsInsideHost",
+    "HostDebugOverlay",
+    "getHostStats",
+    "useHostStats"
+  ]
+}

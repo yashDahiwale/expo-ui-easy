@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Column } from "@expo/ui/jetpack-compose";
-import { Checkbox, Host, Text } from "expo-ui-easy";
-import { Case, Page, Readout } from "../ui";
+import { useState } from 'react';
+import { Column } from '@expo/ui/jetpack-compose';
+import { Checkbox, Host, Text } from 'expo-ui-easy';
+import { Case, Page, Readout } from '../ui';
 
-const LABELS = ["Milk", "Eggs", "Bread"] as const;
+const LABELS = ['Milk', 'Eggs', 'Bread'] as const;
 
 export default function CheckboxDemo() {
   const [basic, setBasic] = useState(false);
@@ -14,10 +14,7 @@ export default function CheckboxDemo() {
 
   return (
     <Page>
-      <Case
-        title="value + onValueChange (RN names)"
-        note="Tap it; the readout must follow."
-      >
+      <Case title="value + onValueChange (RN names)" note="Tap it; the readout must follow.">
         <Checkbox value={basic} onValueChange={setBasic} />
         <Readout text={`value=${String(basic)}`} />
       </Case>
@@ -27,18 +24,11 @@ export default function CheckboxDemo() {
         <Checkbox value disabled />
       </Case>
 
-      <Case
-        title="Expo prop: colors (CheckboxColors)"
-        note="checkedColor, uncheckedColor, checkmarkColor, plus disabled variants."
-      >
+      <Case title="Expo prop: colors (CheckboxColors)" note="checkedColor, uncheckedColor, checkmarkColor, plus disabled variants.">
         <Checkbox
           value={colored}
           onValueChange={setColored}
-          colors={{
-            checkedColor: "#2E7D32",
-            uncheckedColor: "#B71C1C",
-            checkmarkColor: "#FFEB3B",
-          }}
+          colors={{ checkedColor: '#2E7D32', uncheckedColor: '#B71C1C', checkmarkColor: '#FFEB3B' }}
         />
       </Case>
 
@@ -48,17 +38,12 @@ export default function CheckboxDemo() {
             {LABELS.map((label, index) => (
               <Column key={label}>
                 <Text>{label}</Text>
-                <Checkbox
-                  value={items[index] ?? false}
-                  onValueChange={(v) => toggle(index, v)}
-                />
+                <Checkbox value={items[index] ?? false} onValueChange={(v) => toggle(index, v)} />
               </Column>
             ))}
           </Column>
         </Host>
-        <Readout
-          text={`checked=${items.filter(Boolean).length}/${items.length}`}
-        />
+        <Readout text={`checked=${items.filter(Boolean).length}/${items.length}`} />
       </Case>
     </Page>
   );
