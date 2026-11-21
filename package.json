@@ -11,13 +11,16 @@
   },
   "scripts": {
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present && npm run test:bench",
     "generate": "npm run generate -w expo-ui-easy",
     "build": "npm run build -w expo-ui-easy",
     "example": "npm run android -w example",
     "example:tunnel": "npm run tunnel -w example",
     "changeset": "changeset",
-    "release": "npm run build && changeset publish"
+    "release": "npm run build && changeset publish",
+    "bench": "node e2e/bench/run.mjs",
+    "test:bench": "node --test e2e/bench/lib.test.mjs",
+    "e2e": "maestro test e2e/flows"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.0"

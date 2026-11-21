@@ -1,0 +1,7 @@
+# Opens a preview from the home list. Usage: runFlow with env TITLE (exact title shown in the list).
+appId: dev.expouieasy.example
+---
+- scrollUntilVisible:
+    element: ${TITLE}
+- tapOn: ${TITLE}
+- assertVisible: "‹ Back"

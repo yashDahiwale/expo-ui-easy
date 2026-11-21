@@ -1,0 +1,42 @@
+# Manual: builds the example as a release APK, boots an emulator and runs the Maestro flows.
+# Untested scaffold: expect to tune the emulator API level and Maestro install step on first run.
+name: E2E (Maestro)
+on:
+  workflow_dispatch:
+    inputs:
+      flow:
+        description: Flow file or folder under e2e/flows
+        default: e2e/flows
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - run: npm ci
+      - name: Build release APK
+        working-directory: example
+        run: |
+          npx expo prebuild --platform android --no-install
+          cd android && ./gradlew assembleRelease
+      - name: Install Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+      - name: Run flows on an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          script: |
+            adb install example/android/app/build/outputs/apk/release/app-release.apk
+            maestro test ${{ inputs.flow }}

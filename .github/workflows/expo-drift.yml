@@ -1,0 +1,25 @@
+# Nightly: does the newest @expo/ui still match the manifest? A red run means Expo added, removed or renamed
+# something. Read the failing contract test; it names the export or native view.
+name: Expo UI drift
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tag: [latest, next, canary]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --no-audit --no-fund -w expo-ui-easy @expo/ui@${{ matrix.tag }}
+      - run: npm test -w expo-ui-easy
+        continue-on-error: ${{ matrix.tag == 'canary' }}

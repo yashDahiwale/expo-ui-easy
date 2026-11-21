@@ -1,0 +1,11 @@
+# onChangeText reaches React: the readout shows what was typed.
+appId: dev.expouieasy.example
+---
+- launchApp
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: Text fields
+- tapOn: "Type here"
+- inputText: "hello"
+- assertVisible: "text=\"hello\""

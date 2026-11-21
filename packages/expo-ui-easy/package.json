@@ -36,7 +36,8 @@
     "generate": "node scripts/generate-components.mjs",
     "generate:check": "node scripts/generate-components.mjs --check",
     "build": "bob build",
-    "clean": "del-cli lib"
+    "clean": "del-cli lib",
+    "verify-package": "node scripts/verify-package.mjs"
   },
   "react-native-builder-bob": {
     "source": "src",

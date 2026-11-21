@@ -1,0 +1,17 @@
+# Runs "Compare all strategies" for the Switch control at 1000 rows and waits until it is done.
+# The numbers are read from logcat by e2e/bench/run.mjs (see e2e/README.md).
+appId: dev.expouieasy.example
+---
+- launchApp
+- tapOn: "Stress test"
+- tapOn: "Switch"
+- tapOn: "1000"
+- scrollUntilVisible:
+    element: "Compare all strategies @ 1000"
+- tapOn: "Compare all strategies @ 1000"
+- extendedWaitUntil:
+    visible: "Running: compare.*"
+    timeout: 20000
+- extendedWaitUntil:
+    notVisible: "Running: compare.*"
+    timeout: 900000

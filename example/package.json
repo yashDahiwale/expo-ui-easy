@@ -7,7 +7,8 @@
     "start": "expo start",
     "tunnel": "expo start --tunnel",
     "android": "expo run:android",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "typecheck:consumer": "tsc -p tsconfig.consumer.json"
   },
   "dependencies": {
     "@expo/material-symbols": "^0.1.1",

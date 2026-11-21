@@ -1,0 +1,97 @@
+# Every preview screen opens without a red box and the app returns to the home list.
+appId: dev.expouieasy.example
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "NativeList"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Buttons"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Switch"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Checkbox"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "RadioButton"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Slider"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Text"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Text fields"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Chips, toggles, segments, FABs"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Layout & containers"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Dialogs, sheets, menus & bars"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "More components"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: "Progress & loading indicators"
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- assertVisible: "Native UI playground"

@@ -1,0 +1,13 @@
+# Every press bumps the counter by exactly one.
+appId: dev.expouieasy.example
+---
+- launchApp
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: Buttons
+- assertVisible: "presses=0"
+- tapOn: "Button (filled)"
+- assertVisible: "presses=1"
+- tapOn: "TextButton"
+- assertVisible: "presses=2"

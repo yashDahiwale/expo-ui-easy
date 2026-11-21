@@ -1,0 +1,16 @@
+# Scrolling to the end loads more rows exactly once per page, and the list stays usable.
+appId: dev.expouieasy.example
+---
+- launchApp
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: NativeList
+- assertVisible: "rows=100.*"
+- repeat:
+    times: 14
+    commands:
+      - scroll
+- extendedWaitUntil:
+    visible: "rows=1[5-9]0.*|rows=[2-5]00.*"
+    timeout: 15000

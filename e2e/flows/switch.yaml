@@ -1,0 +1,13 @@
+# Tapping the labelled switch flips the shared state shown in the first case's readout.
+appId: dev.expouieasy.example
+---
+- launchApp
+- runFlow:
+    file: _open.yaml
+    env:
+      TITLE: Switch
+- assertVisible: "value=false.*"
+- tapOn: "Airplane mode"
+- assertVisible: "value=true.*"
+- tapOn: "Airplane mode"
+- assertVisible: "value=false.*"
