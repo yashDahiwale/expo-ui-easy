@@ -2,8 +2,8 @@ node_modules/
 lib/
 .expo/
 dist/
-android/
-ios/
+example/android/
+example/ios/
 *.tsbuildinfo
 .DS_Store
 .next/
