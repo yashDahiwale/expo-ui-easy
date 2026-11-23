@@ -8,7 +8,7 @@ both share (`onPress`, `disabled`, `onValueChange`, `style`, `testID`, ...). And
 packages/expo-ui-easy/   the npm package (src/android is the real code, src/ios is a placeholder)
 example/              Expo app: component previews + stress test, consumes the package from source
 e2e/                  device tests and benchmarks (planned)
-docs/                 Next.js + Fumadocs documentation site (planned)
+docs/                 Next.js + Fumadocs documentation site (component pages generated from the manifest)
 ```
 
 ## Develop
@@ -16,6 +16,7 @@ docs/                 Next.js + Fumadocs documentation site (planned)
 ```bash
 npm install
 npm run typecheck && npm test && npm run build
+npm run docs               # documentation site on http://localhost:3000
 npm run example            # needs a development build: npx expo run:android -w example once
 ```
 

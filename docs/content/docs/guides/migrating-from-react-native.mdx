@@ -1,0 +1,28 @@
+---
+title: "Migrating from React Native components"
+description: "Replace React Native core components with their Jetpack Compose equivalents: what maps directly, what changes and what has no equivalent."
+---
+
+Most React Native core components have a Compose counterpart. The shared prop names make the swap mechanical.
+
+| React Native | expo-ui-easy | Notes |
+| --- | --- | --- |
+| `Switch` | `Switch` | `trackColor`/`thumbColor` become `colors={{ checkedTrackColor, ... }}` |
+| `Button` | `Button` (and 4 variants) | label is `children`; `color` becomes `colors={{ containerColor }}` |
+| `Text` | `Text` | `style` is Expo's `TextStyle`; layout style is `containerStyle` |
+| `TextInput` | `TextField` / `OutlinedTextField` | `value` is `useNativeState`, not a string |
+| `ActivityIndicator` | `CircularProgressIndicator` | no `size` prop: use the `size()` modifier |
+| `FlatList` | `NativeList` | rows must be Compose elements |
+| `Modal` | `AlertDialog` / `ModalBottomSheet` | |
+| `RefreshControl` | `NativeList` `onRefresh` or `PullToRefreshBox` | |
+| `Pressable` | `Surface` / buttons | |
+
+## Things that change
+
+- **Children are Compose elements.** A Compose parent cannot contain React Native views. Use `RNHostView` for the exceptions.
+- **Layout is Compose's inside a `Host`.** Use `Row`, `Column`, `Box` and `modifiers`, not flexbox, inside a `Host`.
+- **Wrap sections in one `Host`.** See [The Host model](/docs/concepts/host).
+
+## Things that have no equivalent
+
+Anything React Native has that Expo UI does not expose: `Switch.ios_backgroundColor`, `Slider.tapToSeek`, text selection.

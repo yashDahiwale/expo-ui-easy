@@ -4,7 +4,8 @@
   "description": "Typed React Native wrappers for Expo UI's Jetpack Compose components (Android).",
   "workspaces": [
     "packages/*",
-    "example"
+    "example",
+    "docs"
   ],
   "engines": {
     "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
@@ -20,9 +21,14 @@
     "release": "npm run build && changeset publish",
     "bench": "node e2e/bench/run.mjs",
     "test:bench": "node --test e2e/bench/lib.test.mjs",
-    "e2e": "maestro test e2e/flows"
+    "e2e": "maestro test e2e/flows",
+    "docs": "npm run dev -w expo-ui-easy-docs",
+    "docs:build": "npm run build -w expo-ui-easy-docs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.0"
+  },
+  "optionalDependencies": {
+    "lightningcss-win32-x64-msvc": "^1.33.0"
   }
 }

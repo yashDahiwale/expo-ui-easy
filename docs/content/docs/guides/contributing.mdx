@@ -1,0 +1,32 @@
+---
+title: "Contributing"
+description: "How the manifest, the generator and the contract tests fit together, and how to add or change a component."
+---
+
+## The manifest
+
+`packages/expo-ui-easy/manifest/components.json` lists every public component: its category, renames, host preset and required
+native views. `src/android/components/generated.ts` is generated from it.
+
+```bash
+# edit manifest/components.json, then
+npm run generate
+```
+
+Hand-written components (`kind: "custom"`: the buttons, the text fields, `NativeList`) live in `src/android`.
+
+## Checks
+
+```bash
+npm run typecheck && npm test && npm run build
+```
+
+- Compile-time tests prove wrong or Expo-only prop names fail to compile.
+- Contract tests fail when `@expo/ui` adds, removes or renames an export, when a required native view does not exist, or when
+  generated files are stale.
+- `npm run verify-package` checks what would be published.
+
+## This site
+
+Component pages and props tables are generated from the manifest and the real TypeScript types (`npm run generate -w
+expo-ui-easy-docs`). Examples in `docs/examples/` are type-checked against the package (`npm run typecheck:examples`).

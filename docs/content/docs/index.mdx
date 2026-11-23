@@ -1,0 +1,35 @@
+---
+title: "Introduction"
+description: "expo-ui-easy wraps Expo UI's Jetpack Compose components for React Native. Expo's names and props, React Native names for shared props, and a Host model built for speed."
+---
+
+**expo-ui-easy** is a typed layer over [Expo UI](https://docs.expo.dev/versions/latest/sdk/ui/jetpack-compose/)'s
+Jetpack Compose components. It does three things and tries to do nothing else:
+
+1. **Keeps Expo's names.** `Button`, `FilledTonalButton`, `ListItem`, `AlertDialog.Title`, `colors`, `modifiers`: exactly as Expo UI
+   documents them. There is no parallel vocabulary to learn.
+2. **Uses React Native names only where both worlds share a prop.** `onPress`, `disabled`, `onValueChange`, `style`,
+   `testID`, `numberOfLines`, `onChangeText`. See [Naming](/docs/concepts/naming).
+3. **Manages the Compose `Host` for you.** Expo UI components must live inside a `Host`. expo-ui-easy creates one when you use a
+   component on its own, and gets out of the way when you put a [`Host`](/docs/concepts/host) around a whole screen.
+
+```tsx
+import { Host, Switch, Button } from 'expo-ui-easy';
+
+<Host matchContents>
+  <Switch value={on} onValueChange={setOn} />
+  <Button onPress={save}>Save</Button>
+</Host>
+```
+
+<Cards>
+  <Card title="Getting started" href="/docs/getting-started">Install, peer dependencies and the development build.</Card>
+  <Card title="The Host model" href="/docs/concepts/host">Why one Host beats one per component.</Card>
+  <Card title="Components" href="/docs/components">Every component, with generated props tables.</Card>
+  <Card title="Compatibility" href="/docs/concepts/compatibility">Expo SDK versions and Expo Go.</Card>
+</Cards>
+
+## What it is not
+
+It is not a design system and does not restyle Expo UI. Android only for now (Jetpack Compose); the repository leaves a
+placeholder for SwiftUI. There is no web support.

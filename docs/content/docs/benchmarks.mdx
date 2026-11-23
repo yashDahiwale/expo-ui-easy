@@ -1,0 +1,42 @@
+---
+title: "Benchmarks"
+description: "How to measure Compose Host strategies on your own device with the stress test, and how the benchmark runner reports results as ratios."
+---
+
+Performance claims need your device. The example app has a **stress test** that mounts 100 to 10,000 controls under
+different strategies and reports how long each step takes.
+
+## Strategies compared
+
+| Strategy | What it is |
+| --- | --- |
+| RN core, FlatList | React Native components, virtualized (the baseline) |
+| RN core, ScrollView | React Native components, all mounted |
+| Native, Host per control | Each control standalone: a `Host` each |
+| Native, Host per row | One `Host` per FlatList row |
+| Native, ONE Host, Column | One `Host`, every row composed at once |
+| Native, ONE Host, LazyColumn | One `Host`, recycling lazy list |
+| Native, NativeList | The library's recipe over the same layout |
+
+Each cycle is: mount, flip every row, change one row, unmount. "Burst" flips every row once per frame for five seconds
+and reports frame rate.
+
+## Run it
+
+```bash
+npx expo run:android --variant release -w example    # release build: dev builds add overhead
+npm run bench -- --adb --flow e2e/flows/bench.yaml --md bench.md
+```
+
+The runner reads the `[stress]` log lines, takes the **median of repeated runs** and reports each strategy as a **ratio to a
+baseline** (default: React Native `FlatList`). Ratios stay meaningful on noisy emulators where absolute milliseconds do not.
+
+```bash
+# fail if the NativeList recipe is more than 15% slower than raw LazyColumn
+npm run bench -- --log capture.txt --gate "native-list/native-single-host-lazy:mount:1.15"
+```
+
+## Reading the numbers
+
+`commit` and `frame` are JS-thread timings: Compose composes natively afterwards. Also watch scrolling by eye and use Android
+Studio's profiler when a result looks surprising. Published results will list the device, build type and library version.

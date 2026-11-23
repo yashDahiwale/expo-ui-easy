@@ -1,0 +1,38 @@
+---
+title: "Compatibility"
+description: "Which Expo SDK and @expo/ui versions expo-ui-easy supports, why Expo Go may not render newer components, and how drift is caught."
+---
+
+## One Expo SDK per major version
+
+Each major version of expo-ui-easy targets a single Expo SDK. Version 58.x needs `@expo/ui` `>=58.0.28 <59`. Supporting several SDKs
+would mean every wrapper has to cope with components that do not exist yet in older `@expo/ui` releases.
+
+## Patch releases add components
+
+`@expo/ui` adds components in patch releases within an SDK. Examples: `TopAppBar` arrived in 58.0.22, `SplitButtonLayout` and
+`SelectableDropdownMenuItem` in 58.0.26, `RangeSlider` in 58.0.28. The oldest supported patch is the one that contains every
+component this library exposes.
+
+## Expo Go
+
+Expo Go contains one fixed build of Expo UI's native code. A component whose native view is newer than that build logs
+*"Unable to get the view config for ..."* and renders nothing. Build a development build (`npx expo run:android`) after
+upgrading `@expo/ui`.
+
+To check at runtime:
+
+```tsx
+import { isNativeViewAvailable, missingNativeViews } from 'expo-ui-easy';
+
+isNativeViewAvailable('RangeSliderView'); // true / false
+missingNativeViews(['TopAppBarView', 'RangeSliderView']);
+```
+
+Component pages list the native views a component needs when it was added after the SDK's first release.
+
+## How drift is caught
+
+The repository keeps a manifest of every component. CI runs the contract tests against the oldest supported `@expo/ui` and the
+newest 58.x, and a nightly job runs them against `latest`, `next` and `canary`. A new, removed or renamed Expo export, an unknown
+native view, or a stale generated file fails the run and names what changed.

@@ -1,0 +1,45 @@
+---
+title: "The Host model"
+description: "Every Expo UI component must live inside a Compose Host. Learn when expo-ui-easy creates one for you, and why a single shared Host is faster."
+---
+
+Expo UI renders Jetpack Compose inside a native view called a **`Host`**. Each `Host` is a separate Compose root: its own
+composition, its own measure and layout pass, and one more native view for React Native to manage.
+
+## Two ways to use a component
+
+| | What happens | Cost |
+| --- | --- | --- |
+| **Standalone**: `<Switch value={on} onValueChange={setOn} />` | The component creates a `Host` around itself that sizes to its content | one Compose root per component |
+| **Inside a `Host`**: `<Host><Switch .../><Button .../></Host>` | The component renders as a bare Compose node | one Compose root for everything inside |
+
+`Host` here is Expo's `Host` plus one thing: it tells the components inside it that a Compose root already exists.
+
+```tsx
+import { Host } from 'expo-ui-easy';
+```
+
+## Why it matters
+
+In stress tests during development (a screen of 1,000 controls), one shared `Host`, and a recycling `LazyColumn` for lists,
+measured roughly twice as fast as a `Host` per component. Your numbers depend on the device and build: reproduce them with
+the stress test in the example app, on a release build, and see [Benchmarks](/docs/benchmarks).
+
+## Rules of thumb
+
+- A **screen or section** of Expo UI components: put one `Host` around it.
+- A **long list**: use [`NativeList`](/docs/concepts/native-list). It is one `Host` with a recycling `LazyColumn`.
+- **One-off controls** among normal React Native views: standalone is fine.
+- **Scrollable Compose components** (`LazyColumn`, `LazyRow`, pagers, carousels, inline date pickers) need a bounded size. The
+  auto-created `Host` for these fills its parent or stretches, instead of matching its contents.
+
+## Find accidental Hosts
+
+In development, `<HostDebugOverlay />` (place it at the app root) shows how many Hosts components created for themselves and
+which components made them. A console warning names the top offenders once there are 25. `useHostStats()` and
+`getHostStats()` return the same numbers. All of it is a no-op in production builds.
+
+## Embedding React Native views
+
+Inside a `Host`, `RNHostView` embeds a React Native view into the Compose tree. Components used inside that React Native view
+create their own `Host` again, because `RNHostView` resets the context.

@@ -1,0 +1,28 @@
+---
+title: "Icons"
+description: "Add icons to Jetpack Compose buttons from Material Symbols, Expo UI's Compose Icon, or React Native vector icons."
+---
+
+Buttons accept `startIcon` and `endIcon`. Any Compose element works. Three sources are supported:
+
+| Source | Example | Follows the button's color (incl. disabled) |
+| --- | --- | --- |
+| Material Symbols via Expo UI's universal `Icon` (recommended) | `<Icon name={AddIcon} size={18} />` | yes |
+| Expo UI's Compose `Icon` | `<Icon source={require('./x.xml')} size={18} />` | yes |
+| `@expo/vector-icons` (React Native) | `<RNHostView matchContents><Ionicons name="add" size={18} color="#fff" /></RNHostView>` | no: pass `color` yourself |
+
+```tsx
+import { Icon } from '@expo/ui';
+import AddIcon from '@expo/material-symbols/add.xml';
+import { Button } from 'expo-ui-easy';
+
+<Button onPress={add} startIcon={<Icon name={AddIcon} size={18} />}>Add item</Button>
+```
+
+<Callout title="Padding">
+When an icon is present and you have not passed `contentPadding`, the Material 3 icon padding is applied automatically
+(the icon side shrinks, for example 24dp to 16dp on a `Button`).
+</Callout>
+
+React Native vector icons are React Native views embedded into Compose, so each one costs an extra native view. Prefer Material
+Symbols in lists.

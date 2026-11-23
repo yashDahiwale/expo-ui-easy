@@ -54,3 +54,20 @@ jobs:
       - run: npm run build
       - run: npm run verify-package -w expo-ui-easy
       - run: npm run typecheck:consumer -w expo-ui-easy-example
+
+  # The documentation site builds, and its examples compile against the package.
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck:examples -w expo-ui-easy-docs
+      - run: npm run typecheck -w expo-ui-easy-docs
+      - run: npm run build -w expo-ui-easy-docs
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_PUBLIC_SITE_URL: ${{ vars.DOCS_SITE_URL }}

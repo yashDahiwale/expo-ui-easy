@@ -1,0 +1,35 @@
+---
+title: "Naming"
+description: "expo-ui-easy keeps Expo UI's component and prop names. React Native names are used only for props both share. Here is every rename."
+---
+
+**Expo UI is the source of truth.** Component names, prop names, prop types and sub-components (`Switch.ThumbContent`,
+`AlertDialog.Title`, `TextField.Label`) are exactly Expo's. The only renames are props that React Native already has under
+another name:
+
+| You write (RN name) | Expo UI prop | Where |
+| --- | --- | --- |
+| `onPress` | `onClick` | buttons, chips, FABs, `RadioButton`, `Surface`, nav items, menu items |
+| `disabled` | `enabled` (inverted) | everything that has `enabled` |
+| `onValueChange` | `onCheckedChange` | `Switch`, `Checkbox`, toggle buttons, `SegmentedButton`, `Surface` |
+| `numberOfLines` | `maxLines` | `Text` |
+| `onChangeText` | `onValueChange` | `TextField`, `OutlinedTextField`, `BasicTextField` |
+| `placeholder`, `secureTextEntry`, `multiline`, `editable` | the `Placeholder` slot, `visualTransformation`, `singleLine` (inverted), `readOnly` (inverted) | `TextField`, `OutlinedTextField` |
+| `style` | layout style of the auto-created `Host` | everything (`containerStyle` on `Text` and `DropdownMenu`, which have their own `style`) |
+| `testID`, `accessibilityLabel` | `testID` / `semantics` modifiers | everything |
+
+Everything else is Expo's: `colors`, `modifiers`, `shape`, `contentPadding`, `min` / `max` / `steps`, `progress`, `strokeCap`.
+
+## Why so strict
+
+Because the public types are derived from Expo's own prop types, a prop Expo adds shows up here automatically, and a wrong
+name is a compile error. An explicit Expo prop always wins over an RN alias (for example `singleLine` over `multiline`).
+
+## Props the library adds
+
+- Buttons: `startIcon`, `endIcon` (see [Icons](/docs/concepts/icons)).
+- `TextField` / `OutlinedTextField`: the React Native aliases above.
+- Every component: `hostProps`, to configure the auto-created `Host`.
+- [`NativeList`](/docs/concepts/native-list): a FlatList-style API.
+
+Every component page marks which props use the React Native name and which the library added.

@@ -1,0 +1,51 @@
+---
+title: "Getting started"
+description: "Install expo-ui-easy, add its peer dependencies and run your first Jetpack Compose component in an Expo app."
+---
+
+## Install
+
+```bash
+npx expo install expo-ui-easy @expo/ui
+```
+
+`@expo/ui` is a peer dependency. Each major version of expo-ui-easy pairs with one Expo SDK: version 58.x of this
+library needs `@expo/ui` `>=58.0.28 <59` (see [Compatibility](/docs/concepts/compatibility)).
+
+<Callout type="warn" title="Use a development build">
+Expo Go ships a fixed copy of Expo UI's native code, so components added in later `@expo/ui` patch releases (for example
+`RangeSlider`, `SplitButtonLayout`, `TopAppBar`) render nothing there. Run `npx expo run:android` once to build a
+development build that matches your installed `@expo/ui`.
+</Callout>
+
+## First screen
+
+```tsx
+import { useState } from 'react';
+import { Host, Switch, Text, Column } from 'expo-ui-easy';
+
+export function Settings() {
+  const [on, setOn] = useState(false);
+  return (
+    <Host matchContents>
+      <Column verticalArrangement={{ spacedBy: 8 }}>
+        <Text>Notifications</Text>
+        <Switch value={on} onValueChange={setOn} />
+      </Column>
+    </Host>
+  );
+}
+```
+
+Components also work on their own, without a `Host`. They create a small one around themselves, which is convenient but costs
+one Compose root each. For screens with many controls, wrap them in one `Host`; for long lists use
+[`NativeList`](/docs/concepts/native-list).
+
+## Android only
+
+The package's iOS and web entry points throw a clear error when imported. Import it from `.android.tsx` files or behind a
+`Platform.OS === 'android'` check.
+
+## Icons
+
+Buttons take `startIcon` and `endIcon`. See [Icons](/docs/concepts/icons) for the three ways to supply them.

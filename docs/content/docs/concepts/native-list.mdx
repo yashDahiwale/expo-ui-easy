@@ -1,0 +1,37 @@
+---
+title: "NativeList"
+description: "A FlatList-style list rendered by one Compose Host and a recycling LazyColumn. Header, footer, empty state, separators, onEndReached and pull to refresh."
+---
+
+`NativeList` gives you a FlatList-shaped API on top of the fastest layout we measured: **one** `Host` containing Expo's
+recycling `LazyColumn`. The full props are on the [NativeList component page](/docs/components/scrollables/native-list).
+
+```tsx
+<NativeList
+  data={rows}
+  renderItem={({ item }) => <ListItem>{/* Compose elements */}</ListItem>}
+  keyExtractor={(item) => String(item.id)}
+  ListHeaderComponent={<Text>Header</Text>}
+  ListEmptyComponent={<Text>Nothing here</Text>}
+  ItemSeparatorComponent={<HorizontalDivider />}
+  onEndReached={loadMore}
+  refreshing={refreshing}
+  onRefresh={refresh}
+/>
+```
+
+## Differences from FlatList
+
+- `renderItem` and the header, footer, empty and separator parts must be **Compose elements**, not React Native views.
+- `onEndReachedThreshold` counts **rows** (default 4), not viewport lengths.
+- No `horizontal` support yet.
+
+## How `onEndReached` works
+
+Expo's `LazyColumn` has no scroll callbacks, but with recycling it only mounts rows near the viewport. `NativeList` fires
+`onEndReached` when a row near the end is mounted, once per data length. That is why it needs `recycling` (the default).
+
+## Keys
+
+`keyExtractor` defaults to `item.key`, then `item.id`, then the index (like FlatList). Provide stable keys: they let
+Compose keep rows when you prepend or reorder.
