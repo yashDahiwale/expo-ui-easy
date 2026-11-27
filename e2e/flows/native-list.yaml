@@ -5,6 +5,7 @@ appId: dev.expouieasy.example
 - runFlow:
     file: _open.yaml
     env:
+      SLUG: native-list
       TITLE: NativeList
 - assertVisible: "rows=100.*"
 - repeat:

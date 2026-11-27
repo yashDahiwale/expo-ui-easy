@@ -3,6 +3,7 @@ import * as Expo from '@expo/ui/jetpack-compose';
 import { iconContentPadding, type ButtonFamily } from '../internal/button-padding';
 import { defined } from '../internal/utils';
 import type { NativeProps } from '../internal/types';
+import { createVariants } from '../internal/variants';
 import { wrap } from '../internal/wrap';
 
 /** What the Expo button family adds on top of its Expo props. */
@@ -17,14 +18,14 @@ interface IconSlots {
   endIcon?: ReactNode;
 }
 
-export type ButtonProps = NativeProps<ComponentProps<typeof Expo.Button>> & IconSlots;
+type BaseButtonProps = NativeProps<ComponentProps<typeof Expo.Button>> & IconSlots;
 
 type ExpoButton = typeof Expo.Button;
 
 function createButton(Native: ExpoButton, displayName: string, family: ButtonFamily) {
   const Base = wrap(Native, { displayName });
 
-  function ButtonWithIcons(props: ButtonProps): ReactNode {
+  function ButtonWithIcons(props: BaseButtonProps): ReactNode {
     const { startIcon, endIcon, children, contentPadding, ...rest } = props;
     const hasStart = startIcon != null;
     const hasEnd = endIcon != null;
@@ -55,9 +56,20 @@ function createButton(Native: ExpoButton, displayName: string, family: ButtonFam
   return memo(ButtonWithIcons);
 }
 
-/** Filled button (Material3 `Button`). */
-export const Button = createButton(Expo.Button, 'Button', 'standard');
-export const FilledTonalButton = createButton(Expo.FilledTonalButton, 'FilledTonalButton', 'standard');
-export const OutlinedButton = createButton(Expo.OutlinedButton, 'OutlinedButton', 'standard');
-export const ElevatedButton = createButton(Expo.ElevatedButton, 'ElevatedButton', 'standard');
-export const TextButton = createButton(Expo.TextButton, 'TextButton', 'text');
+/**
+ * One button, five Material3 looks. `variant` picks the Expo component: `filled` (default, `Button`),
+ * `tonal` (`FilledTonalButton`), `outlined`, `elevated` or `text`. Every variant takes the same props.
+ */
+export const Button = createVariants({
+  displayName: 'Button',
+  prop: 'variant',
+  defaultVariant: 'filled',
+  variants: {
+    filled: createButton(Expo.Button, 'Button', 'standard'),
+    tonal: createButton(Expo.FilledTonalButton, 'Button', 'standard'),
+    outlined: createButton(Expo.OutlinedButton, 'Button', 'standard'),
+    elevated: createButton(Expo.ElevatedButton, 'Button', 'standard'),
+    text: createButton(Expo.TextButton, 'Button', 'text'),
+  },
+});
+export type ButtonProps = ComponentProps<typeof Button>;

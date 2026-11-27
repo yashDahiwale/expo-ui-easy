@@ -2,10 +2,18 @@
   "expo": {
     "name": "expo-ui-easy example",
     "slug": "expo-ui-easy-example",
+    "scheme": "expouieasy",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "platforms": ["android"],
-    "android": { "package": "dev.expouieasy.example" }
+    "platforms": [
+      "android"
+    ],
+    "android": {
+      "package": "dev.expouieasy.example"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

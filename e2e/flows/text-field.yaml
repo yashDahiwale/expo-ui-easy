@@ -5,7 +5,8 @@ appId: dev.expouieasy.example
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: Text fields
+      SLUG: text-field
+      TITLE: TextField
 - tapOn: "Type here"
 - inputText: "hello"
 - assertVisible: "text=\"hello\""

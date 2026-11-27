@@ -1,97 +1,118 @@
-# Every preview screen opens without a red box and the app returns to the home list.
+# One component per family opens without a red box, and Android back returns to the list.
 appId: dev.expouieasy.example
 ---
 - launchApp:
     clearState: true
-- assertVisible: "Native UI playground"
+- assertVisible: "expo-ui-easy"
+- assertVisible: "Search components"
+- inputText: "slider"
+- assertVisible: "Slider"
+- tapOn: "Slider"
+- assertVisible: "<Slider />"
+- pressKey: back
+- assertVisible: "Search components"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "NativeList"
+      SLUG: button
+      TITLE: Button
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Buttons"
+      SLUG: icon-button
+      TITLE: IconButton
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Switch"
+      SLUG: floating-action-button
+      TITLE: FloatingActionButton
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Checkbox"
+      SLUG: text
+      TITLE: Text
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "RadioButton"
+      SLUG: text-field
+      TITLE: TextField
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Slider"
+      SLUG: checkbox
+      TITLE: Checkbox
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Text"
+      SLUG: linear-progress-indicator
+      TITLE: LinearProgressIndicator
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Text fields"
+      SLUG: loading-indicator
+      TITLE: LoadingIndicator
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Chips, toggles, segments, FABs"
+      SLUG: card
+      TITLE: Card
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Layout & containers"
+      SLUG: alert-dialog
+      TITLE: AlertDialog
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Dialogs, sheets, menus & bars"
+      SLUG: navigation-bar
+      TITLE: NavigationBar
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "More components"
+      SLUG: date-time-picker
+      TITLE: DateTimePicker
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: "Progress & loading indicators"
+      SLUG: lazy-column
+      TITLE: LazyColumn
 - assertNotVisible: "Unhandled JS Exception.*"
 - pressKey: back
-- assertVisible: "Native UI playground"
+- runFlow:
+    file: _open.yaml
+    env:
+      SLUG: host
+      TITLE: Host
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back
+- runFlow:
+    file: _open.yaml
+    env:
+      SLUG: native-list
+      TITLE: NativeList
+- assertNotVisible: "Unhandled JS Exception.*"
+- pressKey: back

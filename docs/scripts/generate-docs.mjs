@@ -78,7 +78,7 @@ function classify(c, prop) {
   if (c.name === 'NativeList') return { origin: NATIVE_LIST_PROPS.has(prop) ? 'library' : 'expo' };
   if (prop in UNIVERSAL_RN) return { origin: 'rn', expoName: UNIVERSAL_RN[prop] };
   if (c.rename?.[prop]) return { origin: 'rn', expoName: c.rename[prop] };
-  if ((c.name === 'TextField' || c.name === 'OutlinedTextField') && prop in TEXT_FIELD_RN) return { origin: 'rn', expoName: TEXT_FIELD_RN[prop] };
+  if ((c.name === 'TextField') && prop in TEXT_FIELD_RN) return { origin: 'rn', expoName: TEXT_FIELD_RN[prop] };
   if (LIBRARY_PROPS.has(prop)) return { origin: 'library' };
   if (prop === 'containerStyle') return { origin: 'library' };
   if (prop === 'style' && c.hostStyleProp !== 'containerStyle') return { origin: 'library' };
@@ -140,7 +140,9 @@ function intro(c) {
   if (c.name === 'NativeList') return 'A FlatList-style list on **one** `Host` with Expo\'s recycling `LazyColumn`. This is a recipe built by expo-ui-easy, not an Expo UI export. See [NativeList](/docs/concepts/native-list) for how it works.';
   if (c.name === 'Host') return 'Expo UI\'s `Host`, plus one thing: it tells the components inside that a Compose root already exists, so they render as bare Compose nodes. See [The Host model](/docs/concepts/host).';
   if (c.name === 'RNHostView') return 'Embeds a React Native view inside a Compose tree. Components used inside it create their own `Host` again.';
-  if (c.kind === 'custom' && category(c) === 'buttons') return `Expo UI's \`${c.name}\` with two additions: \`startIcon\` and \`endIcon\`, with Material 3 icon padding applied automatically. A plain string child becomes a Compose \`Text\`. Everything else is Expo's. See the ${link}.`;
+  if (c.variants) return `One component for ${Object.keys(c.variants.map).length} Expo UI components: \`${c.variants.prop}\` picks ${Object.entries(c.variants.map).map(([k, v]) => `\`"${k}"\` (Expo's \`${v}\`)`).join(', ')}. The default is \`"${c.variants.default}"\`. Every other prop is Expo's. See the ${link}.`;
+  if (c.name === 'Button') return `Expo UI's \`${c.name}\` with two additions: \`startIcon\` and \`endIcon\`, with Material 3 icon padding applied automatically. A plain string child becomes a Compose \`Text\`. Everything else is Expo's. See the ${link}.`;
+  if (c.name === 'Text') return `Expo UI's \`Text\`, with React Native's \`numberOfLines\` and a \`variant\` prop that picks a Material 3 type role (shorthand for \`style.typography\`; every key in \`style\` overrides it). See the ${link}.`;
   if (c.kind === 'custom') return `Expo UI's \`${c.name}\` with React Native names for the props both share (\`onChangeText\`, \`placeholder\`, \`secureTextEntry\`, \`multiline\`, \`editable\`). \`value\` is Expo's \`useNativeState\`. See the ${link}.`;
   return `Expo UI's \`${c.name}\`, wrapped so it works on its own (it creates a \`Host\` around itself) or inside your own \`Host\`, and accepts the React Native names for the props both worlds share. Expo's props, types and sub-components are unchanged. See the ${link}.`;
 }

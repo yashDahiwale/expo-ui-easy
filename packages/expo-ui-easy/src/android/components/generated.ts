@@ -4,6 +4,7 @@
 import * as Expo from '@expo/ui/jetpack-compose';
 import { fillMaxWidth, type ModifierConfig } from '@expo/ui/jetpack-compose/modifiers';
 import type { ComponentProps } from 'react';
+import { createVariants } from '../internal/variants';
 import { wrap, type NativeComponent } from '../internal/wrap';
 
 const FILL_WIDTH: readonly ModifierConfig[] = [fillMaxWidth()];
@@ -23,12 +24,6 @@ export const TriStateCheckbox = wrap(Expo.TriStateCheckbox, { displayName: 'TriS
 export type TriStateCheckboxProps = ComponentProps<typeof TriStateCheckbox>;
 export const ToggleButton = wrap(Expo.ToggleButton, { displayName: 'ToggleButton', rename: { onValueChange: 'onCheckedChange' } });
 export type ToggleButtonProps = ComponentProps<typeof ToggleButton>;
-export const IconToggleButton = wrap(Expo.IconToggleButton, { displayName: 'IconToggleButton', rename: { onValueChange: 'onCheckedChange' } });
-export type IconToggleButtonProps = ComponentProps<typeof IconToggleButton>;
-export const FilledIconToggleButton = wrap(Expo.FilledIconToggleButton, { displayName: 'FilledIconToggleButton', rename: { onValueChange: 'onCheckedChange' } });
-export type FilledIconToggleButtonProps = ComponentProps<typeof FilledIconToggleButton>;
-export const OutlinedIconToggleButton = wrap(Expo.OutlinedIconToggleButton, { displayName: 'OutlinedIconToggleButton', rename: { onValueChange: 'onCheckedChange' } });
-export type OutlinedIconToggleButtonProps = ComponentProps<typeof OutlinedIconToggleButton>;
 export const SegmentedButton = wrap(Expo.SegmentedButton, { displayName: 'SegmentedButton', rename: { onValueChange: 'onCheckedChange' } });
 export type SegmentedButtonProps = ComponentProps<typeof SegmentedButton>;
 export const SingleChoiceSegmentedButtonRow = wrap(Expo.SingleChoiceSegmentedButtonRow, { displayName: 'SingleChoiceSegmentedButtonRow' });
@@ -45,6 +40,17 @@ export const InputChip = wrap(Expo.InputChip, { displayName: 'InputChip' });
 export type InputChipProps = ComponentProps<typeof InputChip>;
 export const SuggestionChip = wrap(Expo.SuggestionChip, { displayName: 'SuggestionChip' });
 export type SuggestionChipProps = ComponentProps<typeof SuggestionChip>;
+export const IconToggleButton = createVariants({
+  displayName: 'IconToggleButton',
+  prop: 'variant',
+  defaultVariant: 'standard',
+  variants: {
+    standard: wrap(Expo.IconToggleButton, { displayName: 'IconToggleButton', rename: { onValueChange: 'onCheckedChange' } }),
+    filled: wrap(Expo.FilledIconToggleButton, { displayName: 'IconToggleButton', rename: { onValueChange: 'onCheckedChange' } }),
+    outlined: wrap(Expo.OutlinedIconToggleButton, { displayName: 'IconToggleButton', rename: { onValueChange: 'onCheckedChange' } }),
+  },
+});
+export type IconToggleButtonProps = ComponentProps<typeof IconToggleButton>;
 
 // --- sliders ---------------------------------------------------------------
 export const Slider = wrap(Expo.Slider, { displayName: 'Slider', hostDefaults: STRETCH, leadingModifiers: FILL_WIDTH });
@@ -55,44 +61,57 @@ export const VerticalSlider = wrap(Expo.VerticalSlider, { displayName: 'Vertical
 export type VerticalSliderProps = ComponentProps<typeof VerticalSlider>;
 
 // --- text ------------------------------------------------------------------
-export const Text = wrap(Expo.Text, { displayName: 'Text', rename: { numberOfLines: 'maxLines' }, hostStyleProp: 'containerStyle' });
-export type TextProps = ComponentProps<typeof Text>;
 export const BasicTextField = wrap(Expo.BasicTextField, { displayName: 'BasicTextField', rename: { onChangeText: 'onValueChange' } });
 export type BasicTextFieldProps = ComponentProps<typeof BasicTextField>;
 
 // --- buttons ---------------------------------------------------------------
-export const IconButton = wrap(Expo.IconButton, { displayName: 'IconButton' });
-export type IconButtonProps = ComponentProps<typeof IconButton>;
-export const FilledIconButton = wrap(Expo.FilledIconButton, { displayName: 'FilledIconButton' });
-export type FilledIconButtonProps = ComponentProps<typeof FilledIconButton>;
-export const FilledTonalIconButton = wrap(Expo.FilledTonalIconButton, { displayName: 'FilledTonalIconButton' });
-export type FilledTonalIconButtonProps = ComponentProps<typeof FilledTonalIconButton>;
-export const OutlinedIconButton = wrap(Expo.OutlinedIconButton, { displayName: 'OutlinedIconButton' });
-export type OutlinedIconButtonProps = ComponentProps<typeof OutlinedIconButton>;
-export const FloatingActionButton = wrap(Expo.FloatingActionButton, { displayName: 'FloatingActionButton' });
-export type FloatingActionButtonProps = ComponentProps<typeof FloatingActionButton>;
-export const SmallFloatingActionButton = wrap(Expo.SmallFloatingActionButton, { displayName: 'SmallFloatingActionButton' });
-export type SmallFloatingActionButtonProps = ComponentProps<typeof SmallFloatingActionButton>;
-export const LargeFloatingActionButton = wrap(Expo.LargeFloatingActionButton, { displayName: 'LargeFloatingActionButton' });
-export type LargeFloatingActionButtonProps = ComponentProps<typeof LargeFloatingActionButton>;
-export const ExtendedFloatingActionButton = wrap(Expo.ExtendedFloatingActionButton, { displayName: 'ExtendedFloatingActionButton' });
-export type ExtendedFloatingActionButtonProps = ComponentProps<typeof ExtendedFloatingActionButton>;
 export const SplitButtonLayout = wrap(Expo.SplitButtonLayout, { displayName: 'SplitButtonLayout' });
 export type SplitButtonLayoutProps = ComponentProps<typeof SplitButtonLayout>;
+export const IconButton = createVariants({
+  displayName: 'IconButton',
+  prop: 'variant',
+  defaultVariant: 'standard',
+  variants: {
+    standard: wrap(Expo.IconButton, { displayName: 'IconButton' }),
+    filled: wrap(Expo.FilledIconButton, { displayName: 'IconButton' }),
+    tonal: wrap(Expo.FilledTonalIconButton, { displayName: 'IconButton' }),
+    outlined: wrap(Expo.OutlinedIconButton, { displayName: 'IconButton' }),
+  },
+});
+export type IconButtonProps = ComponentProps<typeof IconButton>;
+export const FloatingActionButton = createVariants({
+  displayName: 'FloatingActionButton',
+  prop: 'size',
+  defaultVariant: 'medium',
+  variants: {
+    small: wrap(Expo.SmallFloatingActionButton, { displayName: 'FloatingActionButton' }),
+    medium: wrap(Expo.FloatingActionButton, { displayName: 'FloatingActionButton' }),
+    large: wrap(Expo.LargeFloatingActionButton, { displayName: 'FloatingActionButton' }),
+    extended: wrap(Expo.ExtendedFloatingActionButton, { displayName: 'FloatingActionButton' }),
+  },
+  staticsFrom: Expo.ExtendedFloatingActionButton,
+});
+export type FloatingActionButtonProps = ComponentProps<typeof FloatingActionButton>;
 
 // --- progress --------------------------------------------------------------
 export const CircularProgressIndicator = wrap(Expo.CircularProgressIndicator, { displayName: 'CircularProgressIndicator' });
 export type CircularProgressIndicatorProps = ComponentProps<typeof CircularProgressIndicator>;
 export const CircularWavyProgressIndicator = wrap(Expo.CircularWavyProgressIndicator, { displayName: 'CircularWavyProgressIndicator' });
 export type CircularWavyProgressIndicatorProps = ComponentProps<typeof CircularWavyProgressIndicator>;
-export const LoadingIndicator = wrap(Expo.LoadingIndicator, { displayName: 'LoadingIndicator' });
-export type LoadingIndicatorProps = ComponentProps<typeof LoadingIndicator>;
-export const ContainedLoadingIndicator = wrap(Expo.ContainedLoadingIndicator, { displayName: 'ContainedLoadingIndicator' });
-export type ContainedLoadingIndicatorProps = ComponentProps<typeof ContainedLoadingIndicator>;
 export const LinearProgressIndicator = wrap(Expo.LinearProgressIndicator, { displayName: 'LinearProgressIndicator', hostDefaults: STRETCH, leadingModifiers: FILL_WIDTH });
 export type LinearProgressIndicatorProps = ComponentProps<typeof LinearProgressIndicator>;
 export const LinearWavyProgressIndicator = wrap(Expo.LinearWavyProgressIndicator, { displayName: 'LinearWavyProgressIndicator', hostDefaults: STRETCH, leadingModifiers: FILL_WIDTH });
 export type LinearWavyProgressIndicatorProps = ComponentProps<typeof LinearWavyProgressIndicator>;
+export const LoadingIndicator = createVariants({
+  displayName: 'LoadingIndicator',
+  prop: 'variant',
+  defaultVariant: 'default',
+  variants: {
+    default: wrap(Expo.LoadingIndicator, { displayName: 'LoadingIndicator' }),
+    contained: wrap(Expo.ContainedLoadingIndicator, { displayName: 'LoadingIndicator' }),
+  },
+});
+export type LoadingIndicatorProps = ComponentProps<typeof LoadingIndicator>;
 
 // --- pickers ---------------------------------------------------------------
 export const DateTimePicker = wrap(Expo.DateTimePicker, { displayName: 'DateTimePicker', hostDefaults: STRETCH, leadingModifiers: FILL_WIDTH });
@@ -119,12 +138,6 @@ export const Spacer = wrap(Expo.Spacer, { displayName: 'Spacer' });
 export type SpacerProps = ComponentProps<typeof Spacer>;
 export const Surface = wrap(Expo.Surface, { displayName: 'Surface', rename: { onValueChange: 'onCheckedChange' } });
 export type SurfaceProps = ComponentProps<typeof Surface>;
-export const Card = wrap(Expo.Card, { displayName: 'Card' });
-export type CardProps = ComponentProps<typeof Card>;
-export const ElevatedCard = wrap(Expo.ElevatedCard, { displayName: 'ElevatedCard' });
-export type ElevatedCardProps = ComponentProps<typeof ElevatedCard>;
-export const OutlinedCard = wrap(Expo.OutlinedCard, { displayName: 'OutlinedCard' });
-export type OutlinedCardProps = ComponentProps<typeof OutlinedCard>;
 export const ListItem = wrap(Expo.ListItem, { displayName: 'ListItem' });
 export type ListItemProps = ComponentProps<typeof ListItem>;
 export const VerticalDivider = wrap(Expo.VerticalDivider, { displayName: 'VerticalDivider' });
@@ -135,6 +148,17 @@ export const BadgedBox = wrap(Expo.BadgedBox, { displayName: 'BadgedBox' });
 export type BadgedBoxProps = ComponentProps<typeof BadgedBox>;
 export const HorizontalDivider = wrap(Expo.HorizontalDivider, { displayName: 'HorizontalDivider', hostDefaults: STRETCH });
 export type HorizontalDividerProps = ComponentProps<typeof HorizontalDivider>;
+export const Card = createVariants({
+  displayName: 'Card',
+  prop: 'variant',
+  defaultVariant: 'filled',
+  variants: {
+    filled: wrap(Expo.Card, { displayName: 'Card' }),
+    elevated: wrap(Expo.ElevatedCard, { displayName: 'Card' }),
+    outlined: wrap(Expo.OutlinedCard, { displayName: 'Card' }),
+  },
+});
+export type CardProps = ComponentProps<typeof Card>;
 
 // --- media -----------------------------------------------------------------
 export const Icon = wrap(Expo.Icon, { displayName: 'Icon' });

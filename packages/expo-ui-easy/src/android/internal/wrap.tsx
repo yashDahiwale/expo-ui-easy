@@ -9,10 +9,10 @@ import {
   type ReactNode,
 } from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
-import type { FunctionComponent } from 'react';
 import type { ModifierConfig } from '@expo/ui/jetpack-compose/modifiers';
 import { NativeContent } from '../host/host';
 import { useComposeModifiers } from './modifiers';
+import { copyStatics, type Statics } from './statics';
 import { translateProps } from './translate';
 import type { AutoHostProps, NativeProps, RenameMap } from './types';
 
@@ -33,8 +33,6 @@ export interface WrapOptions<R extends RenameMap> {
   /** Compose modifiers that always come first (e.g. `fillMaxWidth()` for sliders). Use a module-level constant. */
   leadingModifiers?: readonly ModifierConfig[];
 }
-
-export type Statics<C> = Omit<C, keyof FunctionComponent<unknown> | 'prototype'>;
 
 /** A wrapped Expo UI component: same name, same props, same statics (e.g. `Switch.ThumbContent`). */
 export type NativeComponent<
@@ -94,13 +92,4 @@ export function wrap<C extends JSXElementConstructor<any>, const R extends Renam
 
   copyStatics(Expo, wrapped);
   return wrapped as unknown as NativeComponent<C, R>;
-}
-
-/** Carries over static sub-components (Switch.ThumbContent, Slider.Thumb, ...). */
-export function copyStatics(from: object, to: object): void {
-  const source = from as Record<string, unknown>;
-  const target = to as Record<string, unknown>;
-  for (const key of Object.keys(source)) {
-    if (key !== 'displayName') target[key] = source[key];
-  }
 }

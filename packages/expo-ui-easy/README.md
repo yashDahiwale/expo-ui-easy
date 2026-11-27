@@ -21,24 +21,36 @@ Everything else is Expo's: `colors`, `modifiers`, `shape`, `contentPadding`, `mi
 `strokeCap`, `amplitude`, ... Because the public types are derived from Expo's own prop types, new Expo props
 show up here automatically. An explicit Expo prop always wins over an RN alias (e.g. `singleLine` over `multiline`).
 
+## Variants
+
+Where Expo UI ships one component per look, a family here is one component with a typed prop (`Button variant`,
+`TextField variant`, `Card variant`, `IconButton variant`, `IconToggleButton variant`, `LoadingIndicator variant`,
+`FloatingActionButton size`). Props that exist on one variant only are accepted only with it, and the old per-variant
+names (`OutlinedButton`, `TextButton`, `OutlinedTextField`, ...) no longer exist.
+
+```tsx
+<Button onPress={save}>Save</Button>
+<Button variant="outlined" startIcon={<Icon source={add} size={18} />}>Add</Button>
+<TextField variant="outlined" value={name} onChangeText={setText} placeholder="Name" />
+<Text variant="titleLarge">Title</Text>
+```
+
 ## Components
 
 Everything is imported from one place and keeps Expo's name. Slots are Expo's own statics, e.g.
 `AlertDialog.Title`, `ListItem.HeadlineContent`, `TextField.Label`, `FilterChip.Label`.
 
-- **Buttons**: `Button`, `FilledTonalButton`, `OutlinedButton`, `ElevatedButton`, `TextButton`, with extra
-  `startIcon` / `endIcon` (see Icons below); icon buttons `IconButton`, `FilledIconButton`,
-  `FilledTonalIconButton`, `OutlinedIconButton`; `FloatingActionButton` (+ `Small`, `Large`, `Extended`),
-  `SplitButtonLayout`.
-- **Selection**: `Switch`, `Checkbox`, `TriStateCheckbox`, `RadioButton`, `ToggleButton`, `IconToggleButton`,
-  `FilledIconToggleButton`, `OutlinedIconToggleButton`, `SegmentedButton` + `SingleChoiceSegmentedButtonRow` /
+- **Buttons**: `Button` (`variant`: `filled` | `tonal` | `outlined` | `elevated` | `text`) with extra
+  `startIcon` / `endIcon` (see Icons below); `IconButton` (`variant`: `standard` | `filled` | `tonal` | `outlined`);
+  `FloatingActionButton` (`size`: `small` | `medium` | `large` | `extended`); `SplitButtonLayout`.
+- **Selection**: `Switch`, `Checkbox`, `TriStateCheckbox`, `RadioButton`, `ToggleButton`, `IconToggleButton` (`variant`),
+  `SegmentedButton` + `SingleChoiceSegmentedButtonRow` /
   `MultiChoiceSegmentedButtonRow`, chips (`AssistChip`, `FilterChip`, `InputChip`, `SuggestionChip`), `SyncSwitch`.
 - **Sliders**: `Slider`, `RangeSlider`, `VerticalSlider`.
-- **Text**: `Text`, `TextField`, `OutlinedTextField`, `BasicTextField`.
+- **Text**: `Text` (`variant`: a Material 3 type role), `TextField` (`variant`: `filled` | `outlined`), `BasicTextField`.
 - **Progress**: `CircularProgressIndicator`, `LinearProgressIndicator`, `CircularWavyProgressIndicator`,
-  `LinearWavyProgressIndicator`, `LoadingIndicator`, `ContainedLoadingIndicator`.
-- **Layout and containers**: `Row`, `Column`, `Box`, `FlowRow`, `Spacer`, `Surface`, `Card`, `ElevatedCard`,
-  `OutlinedCard`, `ListItem`, `HorizontalDivider`, `VerticalDivider`, `Badge`, `BadgedBox`, `Icon`, `Image`,
+  `LinearWavyProgressIndicator`, `LoadingIndicator` (`variant`: `default` | `contained`).
+- **Layout and containers**: `Row`, `Column`, `Box`, `FlowRow`, `Spacer`, `Surface`, `Card` (`variant`: `filled` | `elevated` | `outlined`), `ListItem`, `HorizontalDivider`, `VerticalDivider`, `Badge`, `BadgedBox`, `Icon`, `Image`,
   `AnimatedVisibility`.
 - **Scrollables**: `LazyColumn`, `LazyRow`, `HorizontalPager`, three carousels, `PullToRefreshBox`. They fill
   their parent by default instead of matching contents (a scrollable needs a bounded size).
@@ -106,9 +118,8 @@ lists. With an icon present the Material3 icon padding is applied unless you pas
   thousands of rows inside one `Host`, import `Row` / `Column` / `Box` straight from `@expo/ui/jetpack-compose`, as
   the stress test does; the props are identical.
 - **Verified**: type-checks under strict settings, compile-time tests for the renamed props, unit tests for the prop
-  translation. Playground demos exist for everything above except `ExposedDropdownMenuBox`, `TooltipBox`,
-  `SearchBar`, `HorizontalFloatingToolbar`, `VerticalSlider`, `SyncSwitch` and `DateRangePicker`; those are wrapped
-  but not exercised yet.
+  translation. The example app has one route per public component (`/component/<kebab-name>`), and a test keeps that list in step
+  with the manifest.
 - **Not verified on a device**: whether Expo's parents (menus, rows, bars) accept the wrapper components as children
   everywhere. If one misbehaves, import that one component from `@expo/ui/jetpack-compose` and tell me.
 
@@ -122,7 +133,7 @@ Components are declared in `manifest/components.json` (name, category, renames, 
 npm run generate
 ```
 
-Hand-written components (`kind: "custom"`: the buttons, the text fields) stay in `src/android/components`.
+Families that differ only in look are `kind: "variants"` entries (see `variants` in the manifest). Hand-written components (`kind: "custom"`: `Button`, `TextField`, `Text`) stay in `src/android/components`.
 
 ## Checks
 

@@ -45,25 +45,18 @@
     {
       "name": "IconToggleButton",
       "category": "selection",
-      "kind": "wrapped",
+      "kind": "variants",
       "rename": {
         "onValueChange": "onCheckedChange"
-      }
-    },
-    {
-      "name": "FilledIconToggleButton",
-      "category": "selection",
-      "kind": "wrapped",
-      "rename": {
-        "onValueChange": "onCheckedChange"
-      }
-    },
-    {
-      "name": "OutlinedIconToggleButton",
-      "category": "selection",
-      "kind": "wrapped",
-      "rename": {
-        "onValueChange": "onCheckedChange"
+      },
+      "variants": {
+        "prop": "variant",
+        "default": "standard",
+        "map": {
+          "standard": "IconToggleButton",
+          "filled": "FilledIconToggleButton",
+          "outlined": "OutlinedIconToggleButton"
+        }
       }
     },
     {
@@ -131,15 +124,6 @@
       "kind": "wrapped"
     },
     {
-      "name": "Text",
-      "category": "text",
-      "kind": "wrapped",
-      "rename": {
-        "numberOfLines": "maxLines"
-      },
-      "hostStyleProp": "containerStyle"
-    },
-    {
       "name": "BasicTextField",
       "category": "text",
       "kind": "wrapped",
@@ -150,42 +134,33 @@
     {
       "name": "IconButton",
       "category": "buttons",
-      "kind": "wrapped"
-    },
-    {
-      "name": "FilledIconButton",
-      "category": "buttons",
-      "kind": "wrapped"
-    },
-    {
-      "name": "FilledTonalIconButton",
-      "category": "buttons",
-      "kind": "wrapped"
-    },
-    {
-      "name": "OutlinedIconButton",
-      "category": "buttons",
-      "kind": "wrapped"
+      "kind": "variants",
+      "variants": {
+        "prop": "variant",
+        "default": "standard",
+        "map": {
+          "standard": "IconButton",
+          "filled": "FilledIconButton",
+          "tonal": "FilledTonalIconButton",
+          "outlined": "OutlinedIconButton"
+        }
+      }
     },
     {
       "name": "FloatingActionButton",
       "category": "buttons",
-      "kind": "wrapped"
-    },
-    {
-      "name": "SmallFloatingActionButton",
-      "category": "buttons",
-      "kind": "wrapped"
-    },
-    {
-      "name": "LargeFloatingActionButton",
-      "category": "buttons",
-      "kind": "wrapped"
-    },
-    {
-      "name": "ExtendedFloatingActionButton",
-      "category": "buttons",
-      "kind": "wrapped"
+      "kind": "variants",
+      "variants": {
+        "prop": "size",
+        "default": "medium",
+        "staticsFrom": "ExtendedFloatingActionButton",
+        "map": {
+          "small": "SmallFloatingActionButton",
+          "medium": "FloatingActionButton",
+          "large": "LargeFloatingActionButton",
+          "extended": "ExtendedFloatingActionButton"
+        }
+      }
     },
     {
       "name": "SplitButtonLayout",
@@ -211,12 +186,15 @@
     {
       "name": "LoadingIndicator",
       "category": "progress",
-      "kind": "wrapped"
-    },
-    {
-      "name": "ContainedLoadingIndicator",
-      "category": "progress",
-      "kind": "wrapped"
+      "kind": "variants",
+      "variants": {
+        "prop": "variant",
+        "default": "default",
+        "map": {
+          "default": "LoadingIndicator",
+          "contained": "ContainedLoadingIndicator"
+        }
+      }
     },
     {
       "name": "LinearProgressIndicator",
@@ -293,17 +271,16 @@
     {
       "name": "Card",
       "category": "layout",
-      "kind": "wrapped"
-    },
-    {
-      "name": "ElevatedCard",
-      "category": "layout",
-      "kind": "wrapped"
-    },
-    {
-      "name": "OutlinedCard",
-      "category": "layout",
-      "kind": "wrapped"
+      "kind": "variants",
+      "variants": {
+        "prop": "variant",
+        "default": "filled",
+        "map": {
+          "filled": "Card",
+          "elevated": "ElevatedCard",
+          "outlined": "OutlinedCard"
+        }
+      }
     },
     {
       "name": "ListItem",
@@ -508,43 +485,38 @@
       "name": "Button",
       "category": "buttons",
       "kind": "custom",
-      "file": "src/android/components/buttons.tsx"
-    },
-    {
-      "name": "FilledTonalButton",
-      "category": "buttons",
-      "kind": "custom",
-      "file": "src/android/components/buttons.tsx"
-    },
-    {
-      "name": "OutlinedButton",
-      "category": "buttons",
-      "kind": "custom",
-      "file": "src/android/components/buttons.tsx"
-    },
-    {
-      "name": "ElevatedButton",
-      "category": "buttons",
-      "kind": "custom",
-      "file": "src/android/components/buttons.tsx"
-    },
-    {
-      "name": "TextButton",
-      "category": "buttons",
-      "kind": "custom",
-      "file": "src/android/components/buttons.tsx"
+      "file": "src/android/components/buttons.tsx",
+      "variants": {
+        "prop": "variant",
+        "default": "filled",
+        "map": {
+          "filled": "Button",
+          "tonal": "FilledTonalButton",
+          "outlined": "OutlinedButton",
+          "elevated": "ElevatedButton",
+          "text": "TextButton"
+        }
+      }
     },
     {
       "name": "TextField",
       "category": "text",
       "kind": "custom",
-      "file": "src/android/components/inputs.tsx"
+      "file": "src/android/components/inputs.tsx",
+      "variants": {
+        "prop": "variant",
+        "default": "filled",
+        "map": {
+          "filled": "TextField",
+          "outlined": "OutlinedTextField"
+        }
+      }
     },
     {
-      "name": "OutlinedTextField",
+      "name": "Text",
       "category": "text",
       "kind": "custom",
-      "file": "src/android/components/inputs.tsx"
+      "file": "src/android/components/text.tsx"
     },
     {
       "name": "Host",

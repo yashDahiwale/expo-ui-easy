@@ -14,13 +14,16 @@ export { HostDebugOverlay, useHostStats } from './host/HostDebugOverlay';
 export { getHostStats } from './internal/host-stats';
 export type { HostStats } from './internal/host-stats';
 
-// Buttons (Expo names; `startIcon` / `endIcon` added)
-export { Button, ElevatedButton, FilledTonalButton, OutlinedButton, TextButton } from './components/buttons';
+// Hand-written components. Families that differ only in look take a `variant` prop (`size` for FABs).
+export { Button } from './components/buttons';
 export type { ButtonProps } from './components/buttons';
+export { TextField } from './components/inputs';
+export type { TextFieldProps } from './components/inputs';
+export { Text } from './components/text';
+export type { TextProps, TextVariant } from './components/text';
 
 // Everything else (Expo names and props; RN names only where both worlds share a prop)
 export * from './components/generated';
-export * from './components/inputs';
 
 // Things that are not components (hooks, factories, slot parts) stay exactly as Expo ships them,
 // so one import covers everything.

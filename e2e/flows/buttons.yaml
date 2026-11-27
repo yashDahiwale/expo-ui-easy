@@ -5,9 +5,10 @@ appId: dev.expouieasy.example
 - runFlow:
     file: _open.yaml
     env:
-      TITLE: Buttons
+      SLUG: button
+      TITLE: Button
 - assertVisible: "presses=0"
-- tapOn: "Button (filled)"
+- tapOn: "Filled (default)"
 - assertVisible: "presses=1"
-- tapOn: "TextButton"
+- tapOn: "Text"
 - assertVisible: "presses=2"

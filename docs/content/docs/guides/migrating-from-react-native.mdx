@@ -10,7 +10,7 @@ Most React Native core components have a Compose counterpart. The shared prop na
 | `Switch` | `Switch` | `trackColor`/`thumbColor` become `colors={{ checkedTrackColor, ... }}` |
 | `Button` | `Button` (and 4 variants) | label is `children`; `color` becomes `colors={{ containerColor }}` |
 | `Text` | `Text` | `style` is Expo's `TextStyle`; layout style is `containerStyle` |
-| `TextInput` | `TextField` / `OutlinedTextField` | `value` is `useNativeState`, not a string |
+| `TextInput` | `TextField` (`variant="outlined"`) | `value` is `useNativeState`, not a string |
 | `ActivityIndicator` | `CircularProgressIndicator` | no `size` prop: use the `size()` modifier |
 | `FlatList` | `NativeList` | rows must be Compose elements |
 | `Modal` | `AlertDialog` / `ModalBottomSheet` | |

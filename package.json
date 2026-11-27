@@ -19,7 +19,7 @@
     "example:tunnel": "npm run tunnel -w example",
     "changeset": "changeset",
     "release": "npm run build && changeset publish",
-    "bench": "node e2e/bench/run.mjs",
+    "bench": "node e2e/bench/run.mjs --adb",
     "test:bench": "node --test e2e/bench/lib.test.mjs",
     "e2e": "maestro test e2e/flows",
     "docs": "npm run dev -w expo-ui-easy-docs",

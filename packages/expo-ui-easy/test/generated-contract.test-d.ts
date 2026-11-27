@@ -25,18 +25,6 @@ export function contract(): void {
   assertTrue<Has<typeof Expo.ToggleButton, 'onCheckedChange'>>(); // rename target exists in Expo
   assertFalse<Has<typeof Expo.ToggleButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
   assertFalse<Has<typeof Expo.ToggleButton, 'style'>>(); // no Expo style: the Host style is style
-  // IconToggleButton
-  assertTrue<Has<typeof Expo.IconToggleButton, 'onCheckedChange'>>(); // rename target exists in Expo
-  assertFalse<Has<typeof Expo.IconToggleButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
-  assertFalse<Has<typeof Expo.IconToggleButton, 'style'>>(); // no Expo style: the Host style is style
-  // FilledIconToggleButton
-  assertTrue<Has<typeof Expo.FilledIconToggleButton, 'onCheckedChange'>>(); // rename target exists in Expo
-  assertFalse<Has<typeof Expo.FilledIconToggleButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
-  assertFalse<Has<typeof Expo.FilledIconToggleButton, 'style'>>(); // no Expo style: the Host style is style
-  // OutlinedIconToggleButton
-  assertTrue<Has<typeof Expo.OutlinedIconToggleButton, 'onCheckedChange'>>(); // rename target exists in Expo
-  assertFalse<Has<typeof Expo.OutlinedIconToggleButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
-  assertFalse<Has<typeof Expo.OutlinedIconToggleButton, 'style'>>(); // no Expo style: the Host style is style
   // SegmentedButton
   assertTrue<Has<typeof Expo.SegmentedButton, 'onCheckedChange'>>(); // rename target exists in Expo
   assertFalse<Has<typeof Expo.SegmentedButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
@@ -61,40 +49,16 @@ export function contract(): void {
   assertFalse<Has<typeof Expo.RangeSlider, 'style'>>(); // no Expo style: the Host style is style
   // VerticalSlider
   assertFalse<Has<typeof Expo.VerticalSlider, 'style'>>(); // no Expo style: the Host style is style
-  // Text
-  assertTrue<Has<typeof Expo.Text, 'maxLines'>>(); // rename target exists in Expo
-  assertFalse<Has<typeof Expo.Text, 'numberOfLines'>>(); // RN name does not shadow an Expo prop
-  assertTrue<Has<typeof Expo.Text, 'style'>>(); // Expo has its own style, so the Host style is containerStyle
   // BasicTextField
   assertTrue<Has<typeof Expo.BasicTextField, 'onValueChange'>>(); // rename target exists in Expo
   assertFalse<Has<typeof Expo.BasicTextField, 'onChangeText'>>(); // RN name does not shadow an Expo prop
   assertFalse<Has<typeof Expo.BasicTextField, 'style'>>(); // no Expo style: the Host style is style
-  // IconButton
-  assertFalse<Has<typeof Expo.IconButton, 'style'>>(); // no Expo style: the Host style is style
-  // FilledIconButton
-  assertFalse<Has<typeof Expo.FilledIconButton, 'style'>>(); // no Expo style: the Host style is style
-  // FilledTonalIconButton
-  assertFalse<Has<typeof Expo.FilledTonalIconButton, 'style'>>(); // no Expo style: the Host style is style
-  // OutlinedIconButton
-  assertFalse<Has<typeof Expo.OutlinedIconButton, 'style'>>(); // no Expo style: the Host style is style
-  // FloatingActionButton
-  assertFalse<Has<typeof Expo.FloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
-  // SmallFloatingActionButton
-  assertFalse<Has<typeof Expo.SmallFloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
-  // LargeFloatingActionButton
-  assertFalse<Has<typeof Expo.LargeFloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
-  // ExtendedFloatingActionButton
-  assertFalse<Has<typeof Expo.ExtendedFloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
   // SplitButtonLayout
   assertFalse<Has<typeof Expo.SplitButtonLayout, 'style'>>(); // no Expo style: the Host style is style
   // CircularProgressIndicator
   assertFalse<Has<typeof Expo.CircularProgressIndicator, 'style'>>(); // no Expo style: the Host style is style
   // CircularWavyProgressIndicator
   assertFalse<Has<typeof Expo.CircularWavyProgressIndicator, 'style'>>(); // no Expo style: the Host style is style
-  // LoadingIndicator
-  assertFalse<Has<typeof Expo.LoadingIndicator, 'style'>>(); // no Expo style: the Host style is style
-  // ContainedLoadingIndicator
-  assertFalse<Has<typeof Expo.ContainedLoadingIndicator, 'style'>>(); // no Expo style: the Host style is style
   // LinearProgressIndicator
   assertFalse<Has<typeof Expo.LinearProgressIndicator, 'style'>>(); // no Expo style: the Host style is style
   // LinearWavyProgressIndicator
@@ -123,12 +87,6 @@ export function contract(): void {
   assertTrue<Has<typeof Expo.Surface, 'onCheckedChange'>>(); // rename target exists in Expo
   assertFalse<Has<typeof Expo.Surface, 'onValueChange'>>(); // RN name does not shadow an Expo prop
   assertFalse<Has<typeof Expo.Surface, 'style'>>(); // no Expo style: the Host style is style
-  // Card
-  assertFalse<Has<typeof Expo.Card, 'style'>>(); // no Expo style: the Host style is style
-  // ElevatedCard
-  assertFalse<Has<typeof Expo.ElevatedCard, 'style'>>(); // no Expo style: the Host style is style
-  // OutlinedCard
-  assertFalse<Has<typeof Expo.OutlinedCard, 'style'>>(); // no Expo style: the Host style is style
   // ListItem
   assertFalse<Has<typeof Expo.ListItem, 'style'>>(); // no Expo style: the Host style is style
   // VerticalDivider
@@ -197,4 +155,42 @@ export function contract(): void {
   assertFalse<Has<typeof Expo.HorizontalFloatingToolbar, 'style'>>(); // no Expo style: the Host style is style
   // NavigationBarItem
   assertFalse<Has<typeof Expo.NavigationBarItem, 'style'>>(); // no Expo style: the Host style is style
+  // IconToggleButton
+  assertTrue<Has<typeof Expo.IconToggleButton, 'onCheckedChange'>>(); // rename target exists in Expo
+  assertFalse<Has<typeof Expo.IconToggleButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
+  assertFalse<Has<typeof Expo.IconToggleButton, 'style'>>(); // no Expo style: the Host style is style
+  // IconToggleButton (FilledIconToggleButton)
+  assertTrue<Has<typeof Expo.FilledIconToggleButton, 'onCheckedChange'>>(); // rename target exists in Expo
+  assertFalse<Has<typeof Expo.FilledIconToggleButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
+  assertFalse<Has<typeof Expo.FilledIconToggleButton, 'style'>>(); // no Expo style: the Host style is style
+  // IconToggleButton (OutlinedIconToggleButton)
+  assertTrue<Has<typeof Expo.OutlinedIconToggleButton, 'onCheckedChange'>>(); // rename target exists in Expo
+  assertFalse<Has<typeof Expo.OutlinedIconToggleButton, 'onValueChange'>>(); // RN name does not shadow an Expo prop
+  assertFalse<Has<typeof Expo.OutlinedIconToggleButton, 'style'>>(); // no Expo style: the Host style is style
+  // IconButton
+  assertFalse<Has<typeof Expo.IconButton, 'style'>>(); // no Expo style: the Host style is style
+  // IconButton (FilledIconButton)
+  assertFalse<Has<typeof Expo.FilledIconButton, 'style'>>(); // no Expo style: the Host style is style
+  // IconButton (FilledTonalIconButton)
+  assertFalse<Has<typeof Expo.FilledTonalIconButton, 'style'>>(); // no Expo style: the Host style is style
+  // IconButton (OutlinedIconButton)
+  assertFalse<Has<typeof Expo.OutlinedIconButton, 'style'>>(); // no Expo style: the Host style is style
+  // FloatingActionButton (SmallFloatingActionButton)
+  assertFalse<Has<typeof Expo.SmallFloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
+  // FloatingActionButton
+  assertFalse<Has<typeof Expo.FloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
+  // FloatingActionButton (LargeFloatingActionButton)
+  assertFalse<Has<typeof Expo.LargeFloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
+  // FloatingActionButton (ExtendedFloatingActionButton)
+  assertFalse<Has<typeof Expo.ExtendedFloatingActionButton, 'style'>>(); // no Expo style: the Host style is style
+  // LoadingIndicator
+  assertFalse<Has<typeof Expo.LoadingIndicator, 'style'>>(); // no Expo style: the Host style is style
+  // LoadingIndicator (ContainedLoadingIndicator)
+  assertFalse<Has<typeof Expo.ContainedLoadingIndicator, 'style'>>(); // no Expo style: the Host style is style
+  // Card
+  assertFalse<Has<typeof Expo.Card, 'style'>>(); // no Expo style: the Host style is style
+  // Card (ElevatedCard)
+  assertFalse<Has<typeof Expo.ElevatedCard, 'style'>>(); // no Expo style: the Host style is style
+  // Card (OutlinedCard)
+  assertFalse<Has<typeof Expo.OutlinedCard, 'style'>>(); // no Expo style: the Host style is style
 }

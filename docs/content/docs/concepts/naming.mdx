@@ -13,8 +13,8 @@ another name:
 | `disabled` | `enabled` (inverted) | everything that has `enabled` |
 | `onValueChange` | `onCheckedChange` | `Switch`, `Checkbox`, toggle buttons, `SegmentedButton`, `Surface` |
 | `numberOfLines` | `maxLines` | `Text` |
-| `onChangeText` | `onValueChange` | `TextField`, `OutlinedTextField`, `BasicTextField` |
-| `placeholder`, `secureTextEntry`, `multiline`, `editable` | the `Placeholder` slot, `visualTransformation`, `singleLine` (inverted), `readOnly` (inverted) | `TextField`, `OutlinedTextField` |
+| `onChangeText` | `onValueChange` | `TextField`, `BasicTextField` |
+| `placeholder`, `secureTextEntry`, `multiline`, `editable` | the `Placeholder` slot, `visualTransformation`, `singleLine` (inverted), `readOnly` (inverted) | `TextField` |
 | `style` | layout style of the auto-created `Host` | everything (`containerStyle` on `Text` and `DropdownMenu`, which have their own `style`) |
 | `testID`, `accessibilityLabel` | `testID` / `semantics` modifiers | everything |
 
@@ -28,7 +28,25 @@ name is a compile error. An explicit Expo prop always wins over an RN alias (for
 ## Props the library adds
 
 - Buttons: `startIcon`, `endIcon` (see [Icons](/docs/concepts/icons)).
-- `TextField` / `OutlinedTextField`: the React Native aliases above.
+- `TextField`: the React Native aliases above.
+- `Text`: `variant`, a Material 3 type role (shorthand for `style.typography`).
+
+## Variants
+
+Expo UI ships one component per look. Here a family is one component with a typed prop; any other value is a compile error:
+
+| Component | Prop | Values (default first) | Replaces |
+| --- | --- | --- | --- |
+| `Button` | `variant` | `filled`, `tonal`, `outlined`, `elevated`, `text` | `FilledTonalButton`, `OutlinedButton`, `ElevatedButton`, `TextButton` |
+| `IconButton` | `variant` | `standard`, `filled`, `tonal`, `outlined` | `FilledIconButton`, `FilledTonalIconButton`, `OutlinedIconButton` |
+| `IconToggleButton` | `variant` | `standard`, `filled`, `outlined` | `FilledIconToggleButton`, `OutlinedIconToggleButton` |
+| `FloatingActionButton` | `size` | `medium`, `small`, `large`, `extended` | `SmallFloatingActionButton`, `LargeFloatingActionButton`, `ExtendedFloatingActionButton` |
+| `TextField` | `variant` | `filled`, `outlined` | `OutlinedTextField` |
+| `Card` | `variant` | `filled`, `elevated`, `outlined` | `ElevatedCard`, `OutlinedCard` |
+| `LoadingIndicator` | `variant` | `default`, `contained` | `ContainedLoadingIndicator` |
+
+The old per-variant exports are removed. Props that exist on only one variant (`expanded` on the extended FAB, `border` on
+filled and outlined cards, `containerColor` on the contained loader) are only accepted with that variant.
 - Every component: `hostProps`, to configure the auto-created `Host`.
 - [`NativeList`](/docs/concepts/native-list): a FlatList-style API.
 

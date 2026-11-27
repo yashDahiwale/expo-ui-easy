@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AlertDialog, Button, Host, Text, TextButton } from 'expo-ui-easy';
+import { AlertDialog, Button, Host, Text } from 'expo-ui-easy';
 
 export function Example() {
   const [open, setOpen] = useState(false);
@@ -11,10 +11,10 @@ export function Example() {
           <AlertDialog.Title><Text>Discard draft?</Text></AlertDialog.Title>
           <AlertDialog.Text><Text>This cannot be undone.</Text></AlertDialog.Text>
           <AlertDialog.ConfirmButton>
-            <TextButton onPress={() => setOpen(false)}>Discard</TextButton>
+            <Button variant="text" onPress={() => setOpen(false)}>Discard</Button>
           </AlertDialog.ConfirmButton>
           <AlertDialog.DismissButton>
-            <TextButton onPress={() => setOpen(false)}>Cancel</TextButton>
+            <Button variant="text" onPress={() => setOpen(false)}>Cancel</Button>
           </AlertDialog.DismissButton>
         </AlertDialog>
       ) : null}

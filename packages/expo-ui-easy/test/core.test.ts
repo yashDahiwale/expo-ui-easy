@@ -129,3 +129,36 @@ describe('host stats', () => {
     expect(getHostStats()).toBe(getHostStats());
   });
 });
+
+import { createVariants } from '../src/android/internal/variants';
+
+describe('createVariants', () => {
+  const Filled = () => null;
+  const Tonal = () => null;
+  const Family = createVariants({
+    displayName: 'Thing',
+    prop: 'variant',
+    defaultVariant: 'filled',
+    variants: { filled: Filled, tonal: Tonal },
+    staticsFrom: Object.assign(() => null, { Label: 'label-slot' }),
+  });
+  // Calling the memoised component's render function returns the element it would render.
+  const render = (props: Record<string, unknown>) =>
+    (Family as unknown as { type: (p: Record<string, unknown>) => { type: unknown; props: Record<string, unknown> } }).type(props);
+
+  it('renders the default variant when none is given', () => {
+    expect(render({ a: 1 }).type).toBe(Filled);
+  });
+  it('picks the named variant and does not forward the discriminating prop', () => {
+    const element = render({ variant: 'tonal', a: 1 });
+    expect(element.type).toBe(Tonal);
+    expect(element.props).toEqual({ a: 1 });
+  });
+  it('falls back to the default for an unknown variant instead of crashing', () => {
+    expect(render({ variant: 'nope' }).type).toBe(Filled);
+  });
+  it('exposes the statics of the staticsFrom component', () => {
+    expect((Family as unknown as { Label: string }).Label).toBe('label-slot');
+    expect((Family as unknown as { displayName: string }).displayName).toBe('Thing');
+  });
+});

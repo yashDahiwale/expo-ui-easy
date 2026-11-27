@@ -1,7 +1,5 @@
-# Opens a preview from the home list. Usage: runFlow with env TITLE (exact title shown in the list).
+# Opens a component's preview by its route. Usage: runFlow with env SLUG (kebab-case component name) and TITLE (the header shown).
 appId: dev.expouieasy.example
 ---
-- scrollUntilVisible:
-    element: ${TITLE}
-- tapOn: ${TITLE}
-- assertVisible: "‹ Back"
+- openLink: expouieasy:///component/${SLUG}
+- assertVisible: "<${TITLE} />"

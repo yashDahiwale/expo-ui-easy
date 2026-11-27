@@ -5,6 +5,7 @@ appId: dev.expouieasy.example
 - runFlow:
     file: _open.yaml
     env:
+      SLUG: switch
       TITLE: Switch
 - assertVisible: "value=false.*"
 - tapOn: "Airplane mode"

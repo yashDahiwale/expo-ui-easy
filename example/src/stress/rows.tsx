@@ -13,7 +13,7 @@ import { fillMaxWidth, height, padding, size, weight, type ModifierConfig } from
 import {
   CircularProgressIndicator,
   Checkbox,
-  FilledTonalButton,
+  Button,
   FilterChip,
   Host,
   RadioButton,
@@ -113,9 +113,9 @@ const NativeControl = memo(function NativeControl(props: {
       );
     case 'button':
       return (
-        <FilledTonalButton onPress={noop} hostProps={LIGHT_HOST}>
+        <Button variant="tonal" onPress={noop} hostProps={LIGHT_HOST}>
           {on ? `Tap ${i}` : `Tapped ${i}`}
-        </FilledTonalButton>
+        </Button>
       );
     case 'text':
       return <Text hostProps={LIGHT_HOST}>{on ? 'ON' : 'OFF'}</Text>;

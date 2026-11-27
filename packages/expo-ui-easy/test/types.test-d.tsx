@@ -5,8 +5,8 @@
 import { Icon, Row, Shape } from '@expo/ui/jetpack-compose';
 import { paddingAll } from '@expo/ui/jetpack-compose/modifiers';
 import {
-  Button, Checkbox, CircularProgressIndicator, FilledIconButton, Host, LinearProgressIndicator,
-  OutlinedButton, RadioButton, Slider, Switch, Text, TextButton, LoadingIndicator,
+  Button, Checkbox, CircularProgressIndicator, Host, IconButton, LinearProgressIndicator,
+  RadioButton, Slider, Switch, Text, LoadingIndicator,
 } from '../src';
 
 declare const iconSource: number;
@@ -30,9 +30,9 @@ export function validUsage() {
       <Button onPress={() => {}} colors={{ containerColor: 'red' }} shape={Shape.Pill({})} startIcon={<Icon source={iconSource} size={18} />}>
         Save
       </Button>
-      <OutlinedButton endIcon={<Icon source={iconSource} />} disabled><Text>Next</Text></OutlinedButton>
-      <TextButton contentPadding={{ start: 4, end: 4 }}>Plain</TextButton>
-      <FilledIconButton onPress={() => {}}><Icon source={iconSource} /></FilledIconButton>
+      <Button variant="outlined" endIcon={<Icon source={iconSource} />} disabled><Text>Next</Text></Button>
+      <Button variant="text" contentPadding={{ start: 4, end: 4 }}>Plain</Button>
+      <IconButton variant="filled" onPress={() => {}}><Icon source={iconSource} /></IconButton>
       {/* Text keeps Expo's `style`; RN's numberOfLines is accepted */}
       <Text numberOfLines={2} style={{ fontWeight: '700' }} containerStyle={{ width: '100%' }}>Hello</Text>
       {/* Progress indicators keep Expo's names and props */}
@@ -77,7 +77,7 @@ export function invalidUsage() {
 // ---------------------------------------------------------------------------------------------
 import {
   AlertDialog, Card, Column, DropdownMenu, FilterChip, FloatingActionButton, LazyColumn, ListItem,
-  ModalBottomSheet, NavigationBar, NavigationBarItem, OutlinedTextField, SegmentedButton,
+  ModalBottomSheet, NavigationBar, NavigationBarItem, SegmentedButton,
   SingleChoiceSegmentedButtonRow, Surface, TextField, ToggleButton, TopAppBar, useNativeState,
 } from '../src';
 
@@ -89,7 +89,7 @@ export function Second() {
       <TextField value={text} onChangeText={(t: string) => void t} placeholder="Name" secureTextEntry multiline={false} editable={false} maxLength={10} autoFocus keyboardOptions={{ keyboardType: 'email' }} isError>
         <TextField.Label><Text>Label</Text></TextField.Label>
       </TextField>
-      <OutlinedTextField value={text} onChangeText={() => {}} singleLine />
+      <TextField variant="outlined" value={text} onChangeText={() => {}} singleLine />
       <FilterChip selected onPress={() => {}} disabled><Text>Chip</Text></FilterChip>
       <ToggleButton checked onValueChange={(v: boolean) => void v} disabled><Text>Bold</Text></ToggleButton>
       <SingleChoiceSegmentedButtonRow>
@@ -102,7 +102,7 @@ export function Second() {
       <LazyColumn><LazyColumn.Items data={[1, 2]} keyExtractor={(n: number) => String(n)}>{({ item }: { item: number }) => <Text>{String(item)}</Text>}</LazyColumn.Items></LazyColumn>
       <AlertDialog onDismissRequest={() => {}}>
         <AlertDialog.Title><Text>Title</Text></AlertDialog.Title>
-        <AlertDialog.ConfirmButton><TextButton onPress={() => {}}>OK</TextButton></AlertDialog.ConfirmButton>
+        <AlertDialog.ConfirmButton><Button variant="text" onPress={() => {}}>OK</Button></AlertDialog.ConfirmButton>
       </AlertDialog>
       <ModalBottomSheet onDismissRequest={() => {}}><Text>Sheet</Text></ModalBottomSheet>
       <DropdownMenu expanded onDismissRequest={() => {}}><Text>Menu</Text></DropdownMenu>
@@ -190,3 +190,83 @@ export function ListInvalid() {
     </>
   );
 }
+
+// ---------------------------------------------------------------------------------------------
+// Variant families: one component, a `variant` (or `size`) prop picks the native component
+// ---------------------------------------------------------------------------------------------
+import * as Lib from '../src';
+import type { ButtonProps, TextFieldProps, TextVariant } from '../src';
+
+export function Variants() {
+  const text = useNativeState('');
+  const variant: ButtonProps['variant'] = 'tonal';
+  return (
+    <Host>
+      <Button>default is filled</Button>
+      <Button variant="filled" onPress={() => {}}>x</Button>
+      <Button variant="tonal">x</Button>
+      <Button variant="elevated" startIcon={<Icon source={iconSource} />}>x</Button>
+      <Button variant={variant}>a variant can be a variable</Button>
+      <IconButton variant="tonal"><Icon source={iconSource} /></IconButton>
+      <Lib.IconToggleButton variant="outlined" checked onValueChange={(v: boolean) => void v}><Icon source={iconSource} /></Lib.IconToggleButton>
+      <Lib.Card variant="outlined" border={{ width: 2 }}><Text>x</Text></Lib.Card>
+      <Lib.Card variant="elevated" elevation={4}><Text>x</Text></Lib.Card>
+      <Lib.LoadingIndicator />
+      <Lib.LoadingIndicator variant="contained" containerColor="red" />
+      <TextField variant="outlined" value={text} placeholder="x" />
+      {/* FloatingActionButton is sized with `size`; only the extended one takes `expanded` and the label slot */}
+      <Lib.FloatingActionButton onPress={() => {}}><Lib.FloatingActionButton.Icon><Icon source={iconSource} /></Lib.FloatingActionButton.Icon></Lib.FloatingActionButton>
+      <Lib.FloatingActionButton size="small" containerColor="red"><Icon source={iconSource} /></Lib.FloatingActionButton>
+      <Lib.FloatingActionButton size="extended" expanded={false}>
+        <Lib.FloatingActionButton.Icon><Icon source={iconSource} /></Lib.FloatingActionButton.Icon>
+        <Lib.FloatingActionButton.Text><Text>Compose</Text></Lib.FloatingActionButton.Text>
+      </Lib.FloatingActionButton>
+      {/* Text gets a Material3 type role; explicit style still wins */}
+      <Text variant="titleLarge">x</Text>
+      <Text variant="bodySmall" style={{ typography: 'labelSmall', fontWeight: '700' }}>x</Text>
+    </Host>
+  );
+}
+
+export function VariantsInvalid() {
+  const text = useNativeState('');
+  return (
+    <>
+      {/* @ts-expect-error unknown button variant */}
+      <Button variant="floating">x</Button>
+      {/* @ts-expect-error the old per-variant prop style is gone */}
+      <Button outlined>x</Button>
+      {/* @ts-expect-error unknown text field variant */}
+      <TextField variant="underlined" value={text} />
+      {/* @ts-expect-error ElevatedCard has no border */}
+      <Lib.Card variant="elevated" border={{ width: 1 }}><Text>x</Text></Lib.Card>
+      {/* @ts-expect-error containerColor only exists on the contained loading indicator */}
+      <Lib.LoadingIndicator containerColor="red" />
+      {/* @ts-expect-error `expanded` only exists on extended floating action buttons */}
+      <Lib.FloatingActionButton size="small" expanded><Icon source={iconSource} /></Lib.FloatingActionButton>
+      {/* @ts-expect-error FAB variants are chosen with `size`, not `variant` */}
+      <Lib.FloatingActionButton variant="large"><Icon source={iconSource} /></Lib.FloatingActionButton>
+      {/* @ts-expect-error not a Material3 type role */}
+      <Text variant="huge">x</Text>
+    </>
+  );
+}
+
+// The per-variant exports were removed in favour of the variant props.
+export const removed = [
+  // @ts-expect-error use <Button variant="outlined">
+  Lib.OutlinedButton,
+  // @ts-expect-error use <Button variant="text">
+  Lib.TextButton,
+  // @ts-expect-error use <TextField variant="outlined">
+  Lib.OutlinedTextField,
+  // @ts-expect-error use <IconButton variant="filled">
+  Lib.FilledIconButton,
+  // @ts-expect-error use <FloatingActionButton size="extended">
+  Lib.ExtendedFloatingActionButton,
+  // @ts-expect-error use <Card variant="elevated">
+  Lib.ElevatedCard,
+  // @ts-expect-error use <LoadingIndicator variant="contained">
+  Lib.ContainedLoadingIndicator,
+];
+export type ExportedTypes = [TextFieldProps, TextVariant];

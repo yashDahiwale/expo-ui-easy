@@ -2,10 +2,9 @@ import { memo, type ComponentProps, type FC, type MemoExoticComponent, type Reac
 import * as Expo from '@expo/ui/jetpack-compose';
 import { mapTextInputAliases } from '../internal/text-input';
 import type { NativeProps } from '../internal/types';
-import { copyStatics, wrap, type Statics } from '../internal/wrap';
+import { createVariants } from '../internal/variants';
+import { wrap } from '../internal/wrap';
 
-// --- Text fields ------------------------------------------------------------------------
-type ExpoTextField = typeof Expo.TextField | typeof Expo.OutlinedTextField;
 const TEXT_FIELD_RENAME = { onChangeText: 'onValueChange' } as const;
 
 /** React Native TextInput names that exist in Expo's TextField under another name or as a slot. */
@@ -22,15 +21,17 @@ interface TextInputAliases {
   editable?: boolean;
 }
 
-export type TextFieldProps<C extends ExpoTextField = typeof Expo.TextField> = Omit<
+type ExpoTextField = typeof Expo.TextField | typeof Expo.OutlinedTextField;
+type BaseTextFieldProps<C extends ExpoTextField> = Omit<
   NativeProps<ComponentProps<C>, typeof TEXT_FIELD_RENAME>,
   'onChangeText'
 > &
   TextInputAliases;
 
-type TextFieldComponent<C extends ExpoTextField> = MemoExoticComponent<FC<TextFieldProps<C>>> & Statics<C>;
-
-function createTextField<C extends ExpoTextField>(Native: C, displayName: string): TextFieldComponent<C> {
+function createTextField<C extends ExpoTextField>(
+  Native: C,
+  displayName: string,
+): MemoExoticComponent<FC<BaseTextFieldProps<C>>> {
   const Base = wrap(Native as unknown as typeof Expo.TextField, { displayName, rename: TEXT_FIELD_RENAME });
   const BaseLoose = Base as unknown as FC<Record<string, unknown>>;
   const Placeholder = (Native as unknown as { Placeholder: FC<{ children: ReactNode }> }).Placeholder;
@@ -59,10 +60,21 @@ function createTextField<C extends ExpoTextField>(Native: C, displayName: string
   Field.displayName = displayName;
   const field = memo(Field);
   field.displayName = displayName;
-  copyStatics(Native, field);
-  return field as unknown as TextFieldComponent<C>;
+  return field as unknown as MemoExoticComponent<FC<BaseTextFieldProps<C>>>;
 }
 
-export const TextField = createTextField(Expo.TextField, 'TextField');
-export const OutlinedTextField = createTextField(Expo.OutlinedTextField, 'OutlinedTextField');
-export type OutlinedTextFieldProps = TextFieldProps<typeof Expo.OutlinedTextField>;
+/**
+ * One text field, two Material3 looks: `filled` (default, Expo's `TextField`) or `outlined` (`OutlinedTextField`).
+ * The slots (`TextField.Label`, `.LeadingIcon`, `.SupportingText`, ...) are Expo's and work with both.
+ */
+export const TextField = createVariants({
+  displayName: 'TextField',
+  prop: 'variant',
+  defaultVariant: 'filled',
+  variants: {
+    filled: createTextField(Expo.TextField, 'TextField'),
+    outlined: createTextField(Expo.OutlinedTextField, 'TextField'),
+  },
+  staticsFrom: Expo.TextField,
+});
+export type TextFieldProps = ComponentProps<typeof TextField>;
